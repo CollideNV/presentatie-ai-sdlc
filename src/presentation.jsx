@@ -756,7 +756,7 @@ export default function Presentation() {
 
             {/* Photo placeholder */}
             <div style={{
-              width: 88, height: 88, borderRadius: '50%',
+              width: 160, height: 160, borderRadius: '50%',
               background: '#37E28420',
               border: '2px solid #37E28460',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -766,8 +766,7 @@ export default function Presentation() {
               fontFamily: 'Inter, sans-serif',
               overflow: 'hidden',
             }}>
-              {/* Swap with: <img src="/berten.jpg" style={{width:'100%',height:'100%',objectFit:'cover'}} /> */}
-              BD
+              <img src="/berten.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
             <p style={{ color: '#37E284', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 10px', fontFamily: 'Inter, sans-serif' }}>
@@ -810,7 +809,7 @@ export default function Presentation() {
 
             {/* Photo placeholder */}
             <div style={{
-              width: 88, height: 88, borderRadius: '50%',
+              width: 160, height: 160, borderRadius: '50%',
               background: '#F0B23B18',
               border: '2px solid #F0B23B55',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
