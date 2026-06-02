@@ -9,3 +9,9 @@ variable "project_name" {
   type        = string
   default     = "bewire-ai-sdlc"
 }
+
+variable "github_repo" {
+  description = "GitHub repo in owner/name format (for OIDC trust policy)"
+  type        = string
+  default     = "CollideNV/presentatie-ai-sdlc"
+}
