@@ -111,524 +111,293 @@ const S  = { backgroundColor: BG,    padding: '52px 72px' }
 const SW = { backgroundColor: WHITE, padding: '52px 72px' }
 const SD = { backgroundColor: NAVY,  padding: '52px 72px' }
 
-// ── Slide 5: Requirements evolutie (step-driven) ────────────────────────────
+// ── Requirements evolutie ────────────────────────────────────────────────────
 
-function Slide5Content() {
-  const { step, placeholder } = useSteps(2)
+function RequirementsEvolutie({ phase }) {
   const ff = 'Inter, sans-serif'
-  const anim = { animation: 'fadeUp 0.35s ease forwards' }
-  const colGrid = '52px repeat(7, 1fr)'
-  const colBg = { rev1: `${TEAL}07`, rev2: `${BLUE}05`, rev3: `${BLUE}09` }
-
-  function NodeBox({ label, sub, active, old, mutedColor, isNew, dim }) {
-    const c = active === 'teal' ? TEAL : active === 'blue' ? BLUE : old ? SLATE : mutedColor ? `${mutedColor}70` : MUTED
-    return (
-      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {isNew && (
-          <span style={{ position: 'absolute', top: -10, left: '50%', transform: 'translateX(-50%)', background: TEAL, color: WHITE, fontSize: '0.38rem', fontWeight: 800, padding: '1px 5px', borderRadius: 3, letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.6, fontFamily: ff, whiteSpace: 'nowrap' }}>NIEUW</span>
-        )}
-        <div style={{
-          padding: active ? '6px 10px' : dim ? '2px 0' : '4px 8px', borderRadius: 6,
-          border: active === 'teal' ? `1.5px solid ${TEAL}` : active === 'blue' ? `1.5px solid ${BLUE}` : old ? `1.5px dashed ${SLATE}` : mutedColor ? `1px solid ${mutedColor}40` : 'none',
-          background: active === 'teal' ? `${TEAL}12` : active === 'blue' ? `${BLUE}0e` : old ? `${SLATE}0a` : 'transparent',
-          boxShadow: active === 'teal' ? `0 0 10px ${TEAL}20` : active === 'blue' ? `0 0 10px ${BLUE}18` : 'none',
-          textAlign: 'center',
-        }}>
-          <p style={{ color: c, fontSize: dim ? '0.55rem' : '0.62rem', fontWeight: active ? 700 : old ? 600 : mutedColor ? 500 : 400, margin: 0, fontFamily: ff, lineHeight: 1.35 }}>{label}</p>
-        </div>
-        {sub && <p style={{ color: c, fontSize: '0.5rem', margin: '2px 0 0', textAlign: 'center', fontFamily: ff, maxWidth: 90, lineHeight: 1.2 }}>{sub}</p>}
+  const configs = [
+    {
+      dark: false, accent: SLATE,
+      eyebrow: '1 van 3 · Requirements — Vroeger',
+      headline: 'Één reviewer. Alle vragen tegelijk.',
+      bullets: [
+        'Tech Team reviewt kwaliteit, functioneel én intent in één reviewmoment.',
+        'Drie soorten expertise, één overbelaste reviewronde.',
+        'Systematische checks vallen weg tussen de grote discussies.',
+      ],
+    },
+    {
+      dark: true, accent: TEAL,
+      eyebrow: '1 van 3 · Requirements — Fase 1',
+      headline: 'AI doet de kwaliteitscheck.',
+      bullets: [
+        "AI Agent screent elk requirement: tegenstrijdigheden, ontbrekende scenario's, onduidelijkheden.",
+        'Tech Lead focust enkel op functionele intent — niet meer op checklist werk.',
+        'Sneller, grondiger — en de analist krijgt direct feedback.',
+      ],
+    },
+    {
+      dark: true, accent: BLUE,
+      eyebrow: '1 van 3 · Requirements — Fase 2',
+      headline: 'De AIGeneer schrijft mee.',
+      bullets: [
+        "Requirements én Gedragsscenario's worden door de AIGeneer opgesteld — AI Agent valideert de volledigheid.",
+        'AIGeneer blijft eindverantwoordelijk: AI ondersteunt, mens beslist.',
+        "De cirkel sluit: Gedragsscenario's worden de basis voor tests in stap 3.",
+      ],
+    },
+  ]
+  const c = configs[phase]
+  const bg = c.dark ? NAVY : BG
+  const headlineColor = c.dark ? WHITE : NAVY
+  const textColor = c.dark ? `${WHITE}CC` : SLATE
+  const eyebrowColor = c.dark ? c.accent : MUTED
+  return (
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+      {c.dark && <>
+        <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
+      </>}
+      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        {c.bullets.map((b, i) => (
+          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+          </div>
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  function Cell({ id, children, first }) {
-    return (
-      <div style={{ borderLeft: first ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '8px 6px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 60 }}>
-        {children}
+
+// ── Code evolutie ────────────────────────────────────────────────────────────
+
+function CodeEvolutie({ phase }) {
+  const ff = 'Inter, sans-serif'
+  const configs = [
+    {
+      dark: false, accent: SLATE,
+      eyebrow: '2 van 3 · Code-ontwikkeling — Vroeger',
+      headline: 'Developer doet alles zelf.',
+      bullets: [
+        'Van technische analyse tot pull request: één persoon, alles tegelijk.',
+        'PR als enig veiligheidsnet: kwaliteit, context en architectuur — allemaal tegelijk beoordeeld.',
+        'Hoog volume, hoge mentale belasting, trage feedback loop.',
+      ],
+    },
+    {
+      dark: true, accent: TEAL,
+      eyebrow: '2 van 3 · Code-ontwikkeling — Fase 1',
+      headline: 'AI versnelt de uitvoering.',
+      bullets: [
+        'Implementatie en testen AI-assisted: developer stuurt, AI voert uit.',
+        'PR gesplitst: AI Agent doet de snelle kwaliteitscheck, Dev Team focust op context en intent.',
+        'Minder boilerplate schrijven — meer tijd voor wat écht telt.',
+      ],
+    },
+    {
+      dark: true, accent: BLUE,
+      eyebrow: '2 van 3 · Code-ontwikkeling — Fase 2',
+      headline: 'AI Agent schrijft en test de code.',
+      bullets: [
+        "AI Agent implementeert volledig op basis van Gedragsscenario's — inclusief automatische testen.",
+        'AIGeneer bepaalt de architectuur en keurt goed via de PR deep-dive.',
+        'Geen diepgaande technische kennis vereist. De driving seat blijft bij de mens.',
+      ],
+    },
+  ]
+  const c = configs[phase]
+  const bg = c.dark ? NAVY : BG
+  const headlineColor = c.dark ? WHITE : NAVY
+  const textColor = c.dark ? `${WHITE}CC` : SLATE
+  const eyebrowColor = c.dark ? c.accent : MUTED
+  return (
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+      {c.dark && <>
+        <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
+      </>}
+      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        {c.bullets.map((b, i) => (
+          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+          </div>
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  // Spanning cell across multiple review columns — used for Vroeger and Fase 1
-  function SpanCell({ from, to, children }) {
-    const bg = [colBg.rev1, colBg.rev2, colBg.rev3].slice(from - 5, to - 4)
-    return (
-      <div style={{ gridColumn: `${from} / ${to}`, borderLeft: `1px solid ${BORDER}`, background: `linear-gradient(to right, ${bg.join(', ')})`, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 60, padding: '8px' }}>
-        {children}
+// ── Testing evolutie ─────────────────────────────────────────────────────────
+
+function TestingEvolutie({ phase }) {
+  const ff = 'Inter, sans-serif'
+  const configs = [
+    {
+      dark: false, accent: SLATE,
+      eyebrow: '3 van 3 · Testing & Delivery — Vroeger',
+      headline: 'Dubbel werk. Late verificatie.',
+      bullets: [
+        "Requirements en testscenario's worden apart opgesteld — twee sporen, twee keer werk.",
+        '"Is dit wat de klant wil?" komt pas aan het einde van het traject.',
+        'Als het antwoord nee is, is de kostprijs hoog.',
+      ],
+    },
+    {
+      dark: true, accent: TEAL,
+      eyebrow: '3 van 3 · Testing & Delivery — Fase 1',
+      headline: 'AI-assisted testing.',
+      bullets: [
+        "QA-Engineer schrijft scenario's en testen met AI-hulp: sneller, betere dekking.",
+        'AI genereert de randgevallen die een mens zou missen.',
+        'QA-Engineer focust op intentie en gedrag — niet meer op checklist werk.',
+      ],
+    },
+    {
+      dark: true, accent: BLUE,
+      eyebrow: '3 van 3 · Testing & Delivery — Fase 2',
+      headline: 'De cirkel sluit.',
+      bullets: [
+        "Gedragsscenario's uit stap 1 zijn de bron: AI Agent genereert alle E2E testen automatisch.",
+        '"Is dit wat de klant wil?" werd al beantwoord in de requirements fase — niet op het einde.',
+        'AIGeneer keurt goed op gedrag en intent. CI/CD deployt automatisch.',
+      ],
+    },
+  ]
+  const c = configs[phase]
+  const bg = c.dark ? NAVY : BG
+  const headlineColor = c.dark ? WHITE : NAVY
+  const textColor = c.dark ? `${WHITE}CC` : SLATE
+  const eyebrowColor = c.dark ? c.accent : MUTED
+  return (
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+      {c.dark && <>
+        <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
+      </>}
+      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+        {c.bullets.map((b, i) => (
+          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+          </div>
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  function PhaseLabel({ children, color = MUTED }) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 6px' }}>
-        <p style={{ color, fontSize: '0.48rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0, fontFamily: ff, writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>{children}</p>
-      </div>
-    )
-  }
 
-  const colHeaders = [
-    { id: 'klant', label: 'Klant-\ngesprek' },
-    { id: 'req',   label: 'Require-\nments' },
-    { id: 'ac',    label: 'Acceptance\nCriteria' },
-    { id: 'rev1',  label: 'Kwaliteits-\ncheck' },
-    { id: 'rev2',  label: 'Intent' },
-    { id: 'rev3',  label: 'Functionele\nreview' },
-    { id: 'dev',   label: 'Develop-\nment' },
+// ── Begin morgen — card deck ─────────────────────────────────────────────────
+
+function BeginMorgenCards() {
+  const { step, placeholder } = useSteps(5)
+  const ff = 'Inter, sans-serif'
+
+  const examples = [
+    { section: 'Direct starten', color: TEAL, effort: 1, ret: 2, title: 'AI meelezer', desc: 'Stuur AI een document, mail of voorstel. "Wat mist hier? Wat klopt niet?" Vijf minuten. Voor élk team.' },
+    { section: 'Direct starten', color: TEAL, effort: 1, ret: 3, title: 'Kern uit een klantenvraag', desc: 'Geef AI de ruwe input van een klant. Laat het de essentie vatten: wat wil de klant écht, wat blijft impliciet?' },
+    { section: 'Direct starten', color: TEAL, effort: 1, ret: 3, title: 'Blinde vlekken benoemen', desc: '"Wat kan er misgaan? Wat ontbreekt?" AI bedenkt systematisch de gaps en scenario\'s die u zou missen.' },
+    { section: 'Met fundament', color: BLUE, effort: 3, ret: 4, title: 'Offerte generatie', desc: 'Leg criteria vast: structuur, argumentatie, prijsbepaling. AI genereert vervolgens complete offertedraften — consistent en snel.' },
+    { section: 'Met fundament', color: BLUE, effort: 2, ret: 4, title: 'Contract screening', desc: 'Definieer uw standaardvoorwaarden en risicovlaggen. AI screent elk binnenkomend contract automatisch op afwijkingen.' },
+    { section: 'Met fundament', color: BLUE, effort: 2, ret: 3, title: 'Aanvraagvalidatie', desc: 'Beschrijf wat een complete briefing inhoudt. AI valideert meteen of alle informatie aanwezig is voor project-start.' },
   ]
 
   return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: BG, display: 'flex', flexDirection: 'column', padding: '34px 64px 28px', boxSizing: 'border-box' }}>
-
+    <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ marginBottom: 14 }}>
-        <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 5px', fontFamily: ff }}>1 van 3 · Requirements</p>
-        <p style={{ color: NAVY, fontSize: '1.5rem', fontWeight: 900, margin: 0, fontFamily: ff }}>AI versterkt de analyserol.</p>
+      <div style={{ backgroundColor: NAVY, padding: '28px 64px 24px', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', right: -60, top: -60, width: 260, height: 260, borderRadius: '50%', border: `1px solid ${TEAL}12`, pointerEvents: 'none' }} />
+        <p style={{ color: TEAL, fontSize: '0.63rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 8px', fontFamily: ff }}>Quick wins</p>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
+          <h2 style={{ color: WHITE, fontSize: '2.2rem', fontWeight: 900, lineHeight: 1, margin: 0, fontFamily: ff }}>Begin morgen.</h2>
+          <p style={{ color: `${WHITE}50`, fontSize: '0.9rem', margin: 0, fontFamily: ff }}>Geen grote investering. Geen reorganisatie.</p>
+        </div>
       </div>
 
-      {/* Matrix */}
-      <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
-
-        {/* Column headers */}
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, background: `${NAVY}04`, borderBottom: `1px solid ${BORDER}` }}>
-          <div />
-          {colHeaders.map(({ id, label }, i) => (
-            <div key={id} style={{ borderLeft: i === 0 ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '5px 6px', textAlign: 'center' }}>
-              <p style={{ color: id === 'rev1' ? `${TEAL}99` : id === 'rev2' || id === 'rev3' ? `${BLUE}99` : MUTED, fontSize: '0.46rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', margin: 0, fontFamily: ff, whiteSpace: 'pre-line', lineHeight: 1.4 }}>{label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Vroeger row — Tech Team review spans rev1+rev2+rev3 (grid cols 5→8) */}
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: `1px solid ${BORDER}` }}>
-          <PhaseLabel>Vroeger</PhaseLabel>
-          <Cell id="klant" first><NodeBox label="Klantgesprek" dim /></Cell>
-          <Cell id="req"><NodeBox label="Requirements" sub="Analist" dim /></Cell>
-          <Cell id="ac"><NodeBox label="Acceptance Criteria" sub="Analist" dim /></Cell>
-          <SpanCell from={5} to={8}>
-            <NodeBox label="kwaliteit · functioneel · intent" sub="Tech Team" old />
-          </SpanCell>
-          <Cell id="dev"><NodeBox label="Development" dim /></Cell>
-        </div>
-
-        {/* Fase 1 row — AI check (rev1), Tech Lead spans rev2+rev3 (grid cols 6→8) */}
-        {step >= 0 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: step >= 1 ? `1px solid ${BORDER}` : 'none', ...anim }}>
-            <PhaseLabel color={TEAL}>Fase 1</PhaseLabel>
-            <Cell id="klant" first><NodeBox label="Klantgesprek" dim /></Cell>
-            <Cell id="req"><NodeBox label="Requirements" sub="Analist" dim /></Cell>
-            <Cell id="ac"><NodeBox label="Acceptance Criteria" sub="Analist" dim /></Cell>
-            <Cell id="rev1"><NodeBox label="Kwaliteitscheck" sub="AI Agent" active="teal" /></Cell>
-            <SpanCell from={6} to={8}>
-              <NodeBox label="functioneel & intent" sub="Tech Lead" active="blue" />
-            </SpanCell>
-            <Cell id="dev"><NodeBox label="Development" dim /></Cell>
-          </div>
-        )}
-
-        {/* Fase 2 row — AI check (rev1, muted), AIGeneer schrijft (rev2), AI+AIGeneer review (rev3) */}
-        {step >= 1 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, ...anim }}>
-            <PhaseLabel color={BLUE}>Fase 2</PhaseLabel>
-            <Cell id="klant" first><NodeBox label="Klantgesprek" dim /></Cell>
-            <Cell id="req"><NodeBox label="Requirements" sub="AIGeneer" dim /></Cell>
-            <Cell id="ac"><NodeBox label="Acceptance Criteria" sub="AIGeneer" dim /></Cell>
-            <Cell id="rev1"><NodeBox label="Kwaliteitscheck" sub="AI Agent" mutedColor={TEAL} /></Cell>
-            <Cell id="rev2"><NodeBox label="Gedragsscenario's" sub="AIGeneer" active="teal" isNew /></Cell>
-            <Cell id="rev3">
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center', width: '100%' }}>
-                <NodeBox label="Compleetheid" sub="AI Agent" active="teal" />
-                <NodeBox label="Eindverantwoordelijkheid" sub="AIGeneer" active="blue" />
+      {/* Card stack */}
+      <div style={{ flex: 1, backgroundColor: BG, display: 'flex', flexDirection: 'column', padding: '20px 64px 16px' }}>
+        <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {examples.map((ex, i) => {
+            const pos = i - (step + 1)
+            if (pos > 2 || pos < 0) return null
+            const isCurrent = pos === 0
+            return (
+              <div key={ex.title} style={{
+                position: 'absolute',
+                width: `${88 - pos * 4}%`,
+                transform: `scale(${1 - pos * 0.025}) translateY(${pos * 18}px)`,
+                zIndex: 10 - pos,
+                transition: 'transform 0.35s ease, opacity 0.35s ease, width 0.35s ease',
+                pointerEvents: isCurrent ? 'auto' : 'none',
+              }}>
+                <div style={{
+                  background: WHITE,
+                  borderRadius: 14,
+                  padding: isCurrent ? '32px 40px' : '24px 32px',
+                  boxShadow: isCurrent ? `0 6px 28px rgba(0,0,0,0.10), 0 0 0 1px ${BORDER}` : `0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px ${BORDER}`,
+                  borderTop: `4px solid ${ex.color}`,
+                  opacity: isCurrent ? 1 : 0.45,
+                  transition: 'all 0.35s ease',
+                }}>
+                  {isCurrent && (<>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+                      <span style={{ background: `${ex.color}14`, border: `1px solid ${ex.color}30`, borderRadius: 100, padding: '3px 12px' }}>
+                        <span style={{ color: ex.color, fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: ff }}>{ex.section}</span>
+                      </span>
+                      <span style={{ color: MUTED, fontSize: '0.72rem', fontFamily: ff }}>{i + 1} / {examples.length}</span>
+                    </div>
+                    <p style={{ color: NAVY, fontSize: '1.35rem', fontWeight: 800, margin: '0 0 10px', fontFamily: ff, lineHeight: 1.2 }}>{ex.title}</p>
+                    <p style={{ color: SLATE, fontSize: '0.88rem', lineHeight: 1.65, margin: '0 0 20px', fontFamily: ff }}>{ex.desc}</p>
+                    <div style={{ display: 'flex', gap: 32 }}>
+                      <div>
+                        <p style={{ color: MUTED, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Effort</p>
+                        <div style={{ display: 'flex', gap: 5 }}>
+                          {[1,2,3].map(d => <span key={d} style={{ width: 10, height: 10, borderRadius: '50%', background: d <= ex.effort ? SLATE : `${SLATE}20`, display: 'block' }} />)}
+                        </div>
+                      </div>
+                      <div>
+                        <p style={{ color: MUTED, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Return</p>
+                        <div style={{ display: 'flex', gap: 5 }}>
+                          {[1,2,3,4].map(d => <span key={d} style={{ width: 10, height: 10, borderRadius: '50%', background: d <= ex.ret ? ex.color : `${ex.color}20`, display: 'block' }} />)}
+                        </div>
+                      </div>
+                    </div>
+                  </>)}
+                </div>
               </div>
-            </Cell>
-            <Cell id="dev"><NodeBox label="Development + Tests" dim /></Cell>
-          </div>
-        )}
-
-      </div>
-
-      {/* Detail area */}
-      <div style={{ flex: 1, position: 'relative', marginTop: 16 }}>
-        {step === 0 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>AI — stap 1</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>Kwaliteitscheck</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>Razendsnel: zijn er tegenstrijdigheden? Ontbreken er scenario's? Is de User Story helder genoeg?</p>
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Tech Lead — stap 2</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: BLUE, marginRight: 8 }}>—</span>Functioneel & intent</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>Niet meer "is dit compleet?" — dat heeft AI al gedaan. Wel: "klopt dit functioneel en past het bij de bedoeling van de klant?"</p>
-            </div>
-          </div>
-        )}
-        {step >= 1 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 2px', fontFamily: ff }}>Functionele review</p>
-              {[
-                { color: TEAL, label: 'AI Agent — compleetheid & scope', sub: 'Dekt elk Gedragsscenario de acceptance criteria? Zijn alle randgevallen gedekt? Is de scope beheersbaar?' },
-                { color: BLUE, label: 'AIGeneer — eindverantwoordelijkheid', sub: 'AI Agent heeft de volledigheid gecheckt. De AIGeneer beslist: klopt dit met wat de klant bedoelt? De driving seat blijft bij de mens.' },
-              ].map(({ color, label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: 0, fontFamily: ff }}>Waarom Gedragsscenario's de sleutel zijn</p>
-              {[
-                { label: 'Geen diepgaande technische kennis nodig', sub: 'De intent van een change begrijpen hoeft niet meer technisch te zijn — Gedragsscenario\'s maken het voor iedereen leesbaar.' },
-                { label: 'Verificatie zonder tech-expertise', sub: 'De extra check op volledigheid? Ook die kan een AIGeneer doen. Geen developer vereist.' },
-                { label: 'AIGeneer blijft in de driving seat', sub: 'Automatisering neemt het controlewerk over, maar de eindverantwoordelijkheid blijft bewust bij de AIGeneer.' },
-              ].map(({ label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 2px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.5, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-      {placeholder}
-    </div>
-  )
-}
-
-// ── Code evolutie (step-driven) ──────────────────────────────────────────────
-
-function CodeEvolutieContent() {
-  const { step, placeholder } = useSteps(2)
-  const ff = 'Inter, sans-serif'
-  const anim = { animation: 'fadeUp 0.35s ease forwards' }
-  const colGrid = '48px repeat(5, 1fr)'
-  const colBg = { impl: `${TEAL}06`, test: `${TEAL}04`, pr1: `${BLUE}08`, pr2: `${BLUE}05` }
-
-  function NodeBox({ label, sub, active, old, mutedColor, dim, isNew }) {
-    const c = active === 'teal' ? TEAL : active === 'blue' ? BLUE : old ? SLATE : mutedColor ? `${mutedColor}70` : MUTED
-    return (
-      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {isNew && (
-          <span style={{ position: 'absolute', top: -10, left: '50%', transform: 'translateX(-50%)', background: TEAL, color: WHITE, fontSize: '0.38rem', fontWeight: 800, padding: '1px 5px', borderRadius: 3, letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.6, fontFamily: ff, whiteSpace: 'nowrap' }}>NIEUW</span>
-        )}
-        <div style={{
-          padding: active ? '6px 10px' : dim ? '2px 0' : '4px 8px', borderRadius: 6,
-          border: active === 'teal' ? `1.5px solid ${TEAL}` : active === 'blue' ? `1.5px solid ${BLUE}` : old ? `1.5px dashed ${SLATE}` : mutedColor ? `1px solid ${mutedColor}40` : 'none',
-          background: active === 'teal' ? `${TEAL}12` : active === 'blue' ? `${BLUE}0e` : old ? `${SLATE}0a` : 'transparent',
-          boxShadow: active === 'teal' ? `0 0 10px ${TEAL}20` : active === 'blue' ? `0 0 10px ${BLUE}18` : 'none',
-          textAlign: 'center',
-        }}>
-          <p style={{ color: c, fontSize: dim ? '0.55rem' : '0.62rem', fontWeight: active ? 700 : old ? 600 : mutedColor ? 500 : 400, margin: 0, fontFamily: ff, lineHeight: 1.35, whiteSpace: 'pre-line' }}>{label}</p>
-        </div>
-        {sub && <p style={{ color: c, fontSize: '0.5rem', margin: '2px 0 0', textAlign: 'center', fontFamily: ff, maxWidth: 90, lineHeight: 1.2 }}>{sub}</p>}
-      </div>
-    )
-  }
-
-  function Cell({ id, children, first }) {
-    return (
-      <div style={{ borderLeft: first ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '8px 6px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 56 }}>
-        {children}
-      </div>
-    )
-  }
-
-  function SpanCell({ from, to, children }) {
-    return (
-      <div style={{ gridColumn: `${from} / ${to}`, borderLeft: `1px solid ${BORDER}`, background: `linear-gradient(to right, ${colBg.pr1}, ${colBg.pr2})`, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 56, padding: '8px' }}>
-        {children}
-      </div>
-    )
-  }
-
-  function PhaseLabel({ children, color = MUTED }) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 6px' }}>
-        <p style={{ color, fontSize: '0.48rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0, fontFamily: ff, writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>{children}</p>
-      </div>
-    )
-  }
-
-  const colHeaders = [
-    { id: 'arch', label: 'Tech. Analyse\n& Arch.' },
-    { id: 'impl', label: 'Implementatie' },
-    { id: 'test', label: 'Auto.\nTesten' },
-    { id: 'pr1',  label: 'PR ·\nKwaliteitscheck' },
-    { id: 'pr2',  label: 'PR ·\nDeep-dive' },
-  ]
-
-  return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: BG, display: 'flex', flexDirection: 'column', padding: '34px 64px 28px', boxSizing: 'border-box' }}>
-      <div style={{ marginBottom: 14 }}>
-        <p style={{ color: BLUE, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 5px', fontFamily: ff }}>2 van 3 · Code-ontwikkeling</p>
-        <p style={{ color: NAVY, fontSize: '1.5rem', fontWeight: 900, margin: 0, fontFamily: ff }}>AI neemt de uitvoering over.</p>
-      </div>
-
-      <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
-        {/* Column headers */}
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, background: `${NAVY}04`, borderBottom: `1px solid ${BORDER}` }}>
-          <div />
-          {colHeaders.map(({ id, label }, i) => (
-            <div key={id} style={{ borderLeft: i === 0 ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '5px 6px', textAlign: 'center' }}>
-              <p style={{ color: (id === 'impl' || id === 'test') ? `${TEAL}99` : (id === 'pr1' || id === 'pr2') ? `${BLUE}99` : MUTED, fontSize: '0.46rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', margin: 0, fontFamily: ff, whiteSpace: 'pre-line', lineHeight: 1.4 }}>{label}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
-        {/* Vroeger row — PR spans pr1+pr2 */}
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: `1px solid ${BORDER}` }}>
-          <PhaseLabel>Vroeger</PhaseLabel>
-          <Cell id="arch" first><NodeBox label={'Tech. Analyse\n& Arch.'} sub="Architect / Tech Lead" dim /></Cell>
-          <Cell id="impl"><NodeBox label="Implementatie" sub="Developer" dim /></Cell>
-          <Cell id="test"><NodeBox label="Auto. Testen" sub="Developer" dim /></Cell>
-          <SpanCell from={5} to={7}><NodeBox label="Pull Request" sub="Dev Team" old /></SpanCell>
+        {/* Progress dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, paddingTop: 8, flexShrink: 0 }}>
+          {examples.map((ex, i) => {
+            const cur = step + 1
+            return (
+              <div key={i} style={{
+                width: i === cur ? 28 : 8,
+                height: 8,
+                borderRadius: 4,
+                background: i < cur ? `${ex.color}50` : i === cur ? ex.color : `${TEAL}20`,
+                transition: 'all 0.3s ease',
+              }} />
+            )
+          })}
         </div>
-
-        {/* Fase 1 row */}
-        {step >= 0 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: step >= 1 ? `1px solid ${BORDER}` : 'none', ...anim }}>
-            <PhaseLabel color={TEAL}>Fase 1</PhaseLabel>
-            <Cell id="arch" first><NodeBox label={'Tech. Analyse\n& Arch.'} sub="Architect / Tech Lead" dim /></Cell>
-            <Cell id="impl"><NodeBox label="Implementatie" sub="Developer + AI" active="teal" /></Cell>
-            <Cell id="test"><NodeBox label="Auto. Testen" sub="Developer + AI" active="teal" /></Cell>
-            <Cell id="pr1"><NodeBox label="Kwaliteitscheck" sub="AI Agent" active="teal" isNew /></Cell>
-            <Cell id="pr2"><NodeBox label="Deep-dive" sub="Dev Team" active="blue" isNew /></Cell>
-          </div>
-        )}
-
-        {/* Fase 2 row */}
-        {step >= 1 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, ...anim }}>
-            <PhaseLabel color={BLUE}>Fase 2</PhaseLabel>
-            <Cell id="arch" first><NodeBox label={'Arch.\nin code'} sub="AIGeneer" active="teal" isNew /></Cell>
-            <Cell id="impl"><NodeBox label="Implementatie" sub="AI Agent" active="teal" /></Cell>
-            <Cell id="test"><NodeBox label="Auto. Testen" sub="AI Agent" active="teal" /></Cell>
-            <Cell id="pr1"><NodeBox label="Kwaliteitscheck" sub="AI Agent" active="teal" /></Cell>
-            <Cell id="pr2"><NodeBox label="Deep-dive" sub="AIGeneer" active="blue" /></Cell>
-          </div>
-        )}
       </div>
 
-      {/* Detail area */}
-      <div style={{ flex: 1, position: 'relative', marginTop: 16 }}>
-        {step === 0 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>AI versnelt — stap 1</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>Implementatie & testen AI-assisted</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>AI stelt code voor, developer beslist en verfijnt. Testen worden automatisch gegenereerd vanuit de Gedragsscenario's.</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: BLUE, marginRight: 8 }}>—</span>PR gesplitst in twee</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>AI Agent screent snel op kwaliteit. Dev Team focust enkel op wat AI niet begrijpt: context en intent.</p>
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Wat verandert</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>Minder boilerplate, meer focus</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>Developers beoordelen en sturen — geen standaardcode meer schrijven.</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: BLUE, marginRight: 8 }}>—</span>Fast feedback loop</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>Kleine bugs worden direct gevangen door de AI Agent — vóór de human review.</p>
-            </div>
-          </div>
-        )}
-        {step >= 1 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 2px', fontFamily: ff }}>AI Agent in de cockpit</p>
-              {[
-                { color: TEAL, label: 'AI Agent — schrijft & test', sub: "Implementatie én automatische testen worden volledig door de AI Agent uitgevoerd, op basis van de Gedragsscenario's." },
-                { color: BLUE, label: 'AIGeneer — architect & reviewer', sub: 'AIGeneer bepalen de context en architectuur, en keuren de AI-output goed via de PR deep-dive. Geen diepgaande technische kennis vereist.' },
-              ].map(({ color, label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: 0, fontFamily: ff }}>De rol van de developer verschuift</p>
-              {[
-                { label: 'AIGeneer bepalen de koers', sub: 'Context, architectuur, aanpak — AIGeneer stuurt. Architect / Tech Lead adviseert. AI Agent voert uit.' },
-                { label: 'Architectuur leeft in de code', sub: 'De architectuur is beschreven als deel van de code zelf — AI Agents lezen die context en gebruiken ze rechtstreeks voor hun implementatie.' },
-                { label: 'Deep-dive door AIGeneer', sub: 'In Fase 2 hoeft de reviewer niet technisch te zijn — AIGeneer keurt goed op intent en gedrag.' },
-              ].map(({ label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 2px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.5, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-      {placeholder}
-    </div>
-  )
-}
-
-// ── Testing evolutie (step-driven) ──────────────────────────────────────────
-
-function TestingEvolutieContent() {
-  const { step, placeholder } = useSteps(2)
-  const ff = 'Inter, sans-serif'
-  const anim = { animation: 'fadeUp 0.35s ease forwards' }
-  const colGrid = '48px repeat(5, 1fr)'
-  const colBg = { scen: `${TEAL}06`, test: `${TEAL}04`, verif: `${BLUE}08`, cicd: `${BLUE}03` }
-
-  function NodeBox({ label, sub, active, old, mutedColor, dim, isNew, badge }) {
-    const c = active === 'teal' ? TEAL : active === 'blue' ? BLUE : old ? SLATE : mutedColor ? `${mutedColor}70` : MUTED
-    return (
-      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {(isNew || badge) && (
-          <span style={{ position: 'absolute', top: -10, left: '50%', transform: 'translateX(-50%)', background: badge ? BLUE : TEAL, color: WHITE, fontSize: '0.38rem', fontWeight: 800, padding: '1px 5px', borderRadius: 3, letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.6, fontFamily: ff, whiteSpace: 'nowrap' }}>{badge || 'NIEUW'}</span>
-        )}
-        <div style={{
-          padding: active ? '6px 10px' : dim ? '2px 0' : '4px 8px', borderRadius: 6,
-          border: active === 'teal' ? `1.5px solid ${TEAL}` : active === 'blue' ? `1.5px solid ${BLUE}` : old ? `1.5px dashed ${SLATE}` : mutedColor ? `1px solid ${mutedColor}40` : 'none',
-          background: active === 'teal' ? `${TEAL}12` : active === 'blue' ? `${BLUE}0e` : old ? `${SLATE}0a` : 'transparent',
-          boxShadow: active === 'teal' ? `0 0 10px ${TEAL}20` : active === 'blue' ? `0 0 10px ${BLUE}18` : 'none',
-          textAlign: 'center',
-        }}>
-          <p style={{ color: c, fontSize: dim ? '0.55rem' : '0.62rem', fontWeight: active ? 700 : old ? 600 : mutedColor ? 500 : 400, margin: 0, fontFamily: ff, lineHeight: 1.35, whiteSpace: 'pre-line' }}>{label}</p>
-        </div>
-        {sub && <p style={{ color: c, fontSize: '0.5rem', margin: '2px 0 0', textAlign: 'center', fontFamily: ff, maxWidth: 90, lineHeight: 1.2 }}>{sub}</p>}
-      </div>
-    )
-  }
-
-  function Cell({ id, children, first }) {
-    return (
-      <div style={{ borderLeft: first ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '8px 6px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 56 }}>
-        {children}
-      </div>
-    )
-  }
-
-  function PhaseLabel({ children, color = MUTED }) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 6px' }}>
-        <p style={{ color, fontSize: '0.48rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0, fontFamily: ff, writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>{children}</p>
-      </div>
-    )
-  }
-
-  const colHeaders = [
-    { id: 'scen',  label: "E2E\nScenario's" },
-    { id: 'test',  label: 'Auto.\nE2E Testen' },
-    { id: 'verif', label: 'Verificatie /\nGoedkeuring' },
-    { id: 'cicd',  label: 'CI/CD' },
-    { id: 'uat',   label: 'User\nAcceptance' },
-  ]
-
-  return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: BG, display: 'flex', flexDirection: 'column', padding: '34px 64px 28px', boxSizing: 'border-box' }}>
-      <div style={{ marginBottom: 14 }}>
-        <p style={{ color: BLUE, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 5px', fontFamily: ff }}>3 van 3 · Testing & Delivery</p>
-        <p style={{ color: NAVY, fontSize: '1.5rem', fontWeight: 900, margin: 0, fontFamily: ff }}>AI genereert de tests.</p>
-      </div>
-
-      <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, background: `${NAVY}04`, borderBottom: `1px solid ${BORDER}` }}>
-          <div />
-          {colHeaders.map(({ id, label }, i) => (
-            <div key={id} style={{ borderLeft: i === 0 ? 'none' : `1px solid ${BORDER}`, background: colBg[id] || 'transparent', padding: '5px 6px', textAlign: 'center' }}>
-              <p style={{ color: (id === 'scen' || id === 'test') ? `${TEAL}99` : id === 'verif' ? `${BLUE}99` : MUTED, fontSize: '0.46rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', margin: 0, fontFamily: ff, whiteSpace: 'pre-line', lineHeight: 1.4 }}>{label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Vroeger row */}
-        <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: `1px solid ${BORDER}` }}>
-          <PhaseLabel>Vroeger</PhaseLabel>
-          <Cell id="scen" first><NodeBox label={"E2E Scenario's"} sub="QA-Engineer" dim /></Cell>
-          <Cell id="test"><NodeBox label="Auto. E2E Testen" sub="QA-Engineer" dim /></Cell>
-          <Cell id="verif"><NodeBox label="Manuele verificatie" sub="QA-Engineer" old /></Cell>
-          <Cell id="cicd"><NodeBox label="CI/CD" sub="geautomatiseerd" dim /></Cell>
-          <Cell id="uat"><NodeBox label="User Acceptance" sub="Klant / Business" dim /></Cell>
-        </div>
-
-        {/* Fase 1 row */}
-        {step >= 0 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, borderBottom: step >= 1 ? `1px solid ${BORDER}` : 'none', ...anim }}>
-            <PhaseLabel color={TEAL}>Fase 1</PhaseLabel>
-            <Cell id="scen" first><NodeBox label={"E2E Scenario's"} sub="QA-Engineer + AI" active="teal" /></Cell>
-            <Cell id="test"><NodeBox label="Auto. E2E Testen" sub="QA-Engineer + AI" active="teal" /></Cell>
-            <Cell id="verif"><NodeBox label="Verificatie" sub="QA-Engineer" active="blue" /></Cell>
-            <Cell id="cicd"><NodeBox label="CI/CD" sub="geautomatiseerd" dim /></Cell>
-            <Cell id="uat"><NodeBox label="User Acceptance" sub="Klant / Business" dim /></Cell>
-          </div>
-        )}
-
-        {/* Fase 2 row */}
-        {step >= 1 && (
-          <div style={{ display: 'grid', gridTemplateColumns: colGrid, ...anim }}>
-            <PhaseLabel color={BLUE}>Fase 2</PhaseLabel>
-            <Cell id="scen" first><NodeBox label={"Gedragsscenario's"} sub="reeds beschikbaar" active="teal" badge="VAN STAP 1" /></Cell>
-            <Cell id="test"><NodeBox label="Auto. E2E Testen" sub="AI Agent" active="teal" isNew /></Cell>
-            <Cell id="verif"><NodeBox label="Goedkeuring" sub="AIGeneer" active="blue" /></Cell>
-            <Cell id="cicd"><NodeBox label="CI/CD" sub="geautomatiseerd" dim /></Cell>
-            <Cell id="uat"><NodeBox label="User Acceptance" sub="Klant / Business" dim /></Cell>
-          </div>
-        )}
-      </div>
-
-      {/* Detail area */}
-      <div style={{ flex: 1, position: 'relative', marginTop: 16 }}>
-        {step === 0 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Fase 1 — AI-assisted testing</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>{"Scenario's en testen AI-assisted"}</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>QA-Engineer schrijft scenario's en stelt testen op met AI-hulp. Sneller, betere dekking, minder handmatig werk.</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: BLUE, marginRight: 8 }}>—</span>QA-Engineer als kwaliteitspoort</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>{"'Is dit wat de klant bedoelde?' — die vraag stelt de QA-Engineer nog steeds. Met betere automatische dekking is er meer tijd voor de echte edge cases."}</p>
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Wat verandert</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>Snellere testcyclus, hogere dekking</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>AI genereert testgevallen die een mens snel zou missen — randgevallen zijn nu de norm.</p>
-              <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color: BLUE, marginRight: 8 }}>—</span>Manuele verificatie gereduceerd</p>
-              <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>Betere automatische dekking betekent minder manueel checken — QA-Engineer focust op intentie en gedrag.</p>
-            </div>
-          </div>
-        )}
-        {step >= 1 && (
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 28, ...anim }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: '0 0 2px', fontFamily: ff }}>De cirkel sluit</p>
-              {[
-                { color: TEAL, label: "Gedragsscenario's → E2E testen", sub: "De scenario's uit stap 1 zijn de bron. AI Agent genereert automatisch alle E2E testen — geen apart schrijfmoment meer." },
-                { color: BLUE, label: 'AIGeneer — finale goedkeuring', sub: "De vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase. AIGeneer verifieert hier: gedraagt de code zich zoals beschreven? Daarna deployt CI/CD automatisch." },
-              ].map(({ color, label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 4px', fontFamily: ff }}><span style={{ color, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.55, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-            <div style={{ width: 1, background: BORDER, alignSelf: 'stretch' }} />
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 18 }}>
-              <p style={{ color: MUTED, fontSize: '0.57rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', margin: 0, fontFamily: ff }}>Waarom dit zo krachtig is</p>
-              {[
-                { label: "Scenario's schrijven = testen schrijven", sub: "Eén investering in stap 1 betaalt dubbel: betere requirements én gratis E2E testen." },
-                { label: '"Is dit wat de klant wil?" verschuift naar stap 1', sub: 'Die vraag werd al gesteld door de AIGeneer in de requirements fase — niet meer door QA op het einde.' },
-                { label: 'AIGeneer als finale kwaliteitspoort', sub: 'Geen technisch profiel vereist — AIGeneer toetst op gedrag en intent. Na goedkeuring deployt CI/CD.' },
-              ].map(({ label, sub }) => (
-                <div key={label}>
-                  <p style={{ color: NAVY, fontSize: '0.85rem', fontWeight: 700, margin: '0 0 2px', fontFamily: ff }}><span style={{ color: TEAL, marginRight: 8 }}>—</span>{label}</p>
-                  <p style={{ color: SLATE, fontSize: '0.75rem', lineHeight: 1.5, margin: '0 0 0 16px', fontFamily: ff }}>{sub}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
       {placeholder}
     </div>
   )
@@ -695,7 +464,7 @@ export default function Presentation() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
               <div>
                 <p style={{ color: NAVY, fontSize: '1rem', fontWeight: 700, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>Berten De Schutter</p>
-                <p style={{ color: TEAL, fontSize: '0.85rem', margin: 0, fontFamily: 'Inter, sans-serif' }}>Collide NV</p>
+                <p style={{ color: TEAL, fontSize: '0.85rem', margin: 0, fontFamily: 'Inter, sans-serif' }}>Collide</p>
               </div>
               <div style={{ width: 1, background: BORDER, margin: '0 36px', height: 32 }} />
               <div>
@@ -1104,21 +873,33 @@ export default function Presentation() {
         </Notes>
       </Slide>
 
-      {/* ── 6. Requirements evolutie — stap-voor-stap ────────────────── */}
+      {/* ── Requirements evolutie — 3 slides ────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
-        <Slide5Content />
+        <RequirementsEvolutie phase={0} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
           "Laten we even terugkijken naar hoe het vroeger werkte. Klantgesprek → requirements → acceptance criteria → en dan: was het goed genoeg? Één persoon die dat allemaal moet beoordelen."<br/><br/>
-          <em>Stap 1 (klik):</em><br/>
-          "In Fase 1 hebben we die review opgesplitst. AI doet de snelle volledigheidscheck. Tech Lead focust op intentie en toepasbaarheid. Elk in hun sterkste rol."<br/><br/>
-          <em>Stap 2 (klik):</em><br/>
-          "In Fase 2 zijn we verder gegaan. We schrijven nu Gedragsscenario's. Vóór er nagedacht wordt over architectuur of implementatie beschrijft het hele team samen hoe het systeem zich moet gedragen — in elk denkbaar scenario. En die scenario's verdwijnen niet. Ze leven in de codebase."
+          "Kwaliteit, volledigheid én functionele fit — allemaal op hetzelfde reviewmoment. Dat is traag, arbeidsintensief, en elk type vraag vraagt eigenlijk een andere expertise."
         </Notes>
       </Slide>
 
+      <Slide style={{ padding: 0, backgroundColor: BG }}>
+        <RequirementsEvolutie phase={1} />
+        <Notes>
+          <em>[Rubin]</em><br/><br/>
+          "In Fase 1 splitsen we die review op. AI doet de snelle volledigheidscheck: zijn er tegenstrijdigheden? Ontbreken er scenario's? Is de User Story helder?"<br/><br/>
+          "De Tech Lead focust op intentie en toepasbaarheid. Niet meer 'is dit compleet?' — dat heeft AI al gedaan. Wel: 'klopt dit functioneel en past het bij de bedoeling van de klant?'"
+        </Notes>
+      </Slide>
 
-
+      <Slide style={{ padding: 0, backgroundColor: BG }}>
+        <RequirementsEvolutie phase={2} />
+        <Notes>
+          <em>[Rubin]</em><br/><br/>
+          "In Fase 2 zijn we verder gegaan. We schrijven nu Gedragsscenario's. Vóór er nagedacht wordt over architectuur of implementatie beschrijft het hele team samen hoe het systeem zich moet gedragen — in elk denkbaar scenario."<br/><br/>
+          "En die scenario's verdwijnen niet. Ze leven in de codebase. En — zoals je straks zult zien — ze betalen dubbel."
+        </Notes>
+      </Slide>
 
       {/* ── 8. AIGeneer ─────────────────────────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: NAVY }}>
@@ -1178,111 +959,61 @@ export default function Presentation() {
         </Notes>
       </Slide>
 
-      {/* ── 7+8. Code evolutie — stap-voor-stap ─────────────────────── */}
+      {/* ── Code evolutie — 3 slides ─────────────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
-        <CodeEvolutieContent />
+        <CodeEvolutie phase={0} />
         <Notes>
           <em>[Berten]</em><br/><br/>
-          "Vroeger deed de developer alles zelf: analyse, schrijven, testen, pull request. Eén kwaliteitscheck aan het einde — door het Dev Team."<br/><br/>
-          <em>Stap 1 (klik):</em><br/>
-          "In Fase 1 gaat AI helpen bij het schrijven en testen. AI-assisted — de developer beslist nog steeds, maar gaat sneller. De PR splitst: AI Agent doet de snelle kwaliteitscheck, Dev Team focust op context en intent."<br/><br/>
-          <em>Stap 2 (klik):</em><br/>
-          "In Fase 2 neemt de AI Agent de uitvoering volledig over. Implementatie en testen worden gegenereerd op basis van de Gedragsscenario's. De developer verschuift naar architect en reviewer. Deep-dive blijft menselijk."
+          "Vroeger deed de developer alles zelf: analyse, schrijven, testen, pull request. Eén kwaliteitscheck aan het einde — door het Dev Team. Alles op hetzelfde moment: kwaliteit, context, architectuur, intent."
         </Notes>
       </Slide>
 
-      {/* ── 8. Testing evolutie — stap-voor-stap ────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
-        <TestingEvolutieContent />
+        <CodeEvolutie phase={1} />
+        <Notes>
+          <em>[Berten]</em><br/><br/>
+          "In Fase 1 gaat AI helpen bij het schrijven en testen. AI-assisted — de developer beslist nog steeds, maar gaat sneller."<br/><br/>
+          "De PR splitst in twee: AI Agent doet de snelle kwaliteitscheck. Dev Team focust enkel op wat AI niet begrijpt: context en intent. Kleinere vragen worden weggevangen vóór de human review."
+        </Notes>
+      </Slide>
+
+      <Slide style={{ padding: 0, backgroundColor: BG }}>
+        <CodeEvolutie phase={2} />
+        <Notes>
+          <em>[Berten]</em><br/><br/>
+          "In Fase 2 neemt de AI Agent de uitvoering volledig over. Implementatie en testen worden gegenereerd op basis van de Gedragsscenario's."<br/><br/>
+          "De developer verschuift naar architect en reviewer. Architectuur leeft in de code zelf — AI Agent leest die context en gebruikt ze voor de implementatie. Deep-dive blijft menselijk, maar zonder technisch profiel."
+        </Notes>
+      </Slide>
+
+      {/* ── Testing evolutie — 3 slides ──────────────────────────────── */}
+      <Slide style={{ padding: 0, backgroundColor: BG }}>
+        <TestingEvolutie phase={0} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "Vroeger schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan automatische testen draaien, manuele verificatie, en de vraag: 'is dit wat de klant bedoelde?' Die vraag landde steeds bij de QA-Engineer, op het einde van het proces."<br/><br/>
-          <em>Stap 1 (klik):</em><br/>
-          "In Fase 1 wordt de QA-Engineer geholpen door AI. Scenario's schrijven gaat sneller, testdekking verbetert. Maar de vraag 'klopt dit met de intent?' blijft bij de QA-Engineer."<br/><br/>
-          <em>Stap 2 (klik):</em><br/>
-          "In Fase 2 sluit de cirkel. De Gedragsscenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E testen. AI Agent genereert de testen, AIGeneer keurt goed. En die vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase — hier controleer je enkel nog of de code doet wat beschreven staat."
+          "Vroeger schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan automatische testen draaien, manuele verificatie."<br/><br/>
+          "En de vraag 'is dit wat de klant bedoelde?' landde steeds bij de QA-Engineer, op het einde van het proces. Als het antwoord 'nee' was, was de kostprijs hoog."
         </Notes>
       </Slide>
 
-      {/* ── 10. Begin morgen ─────────────────────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column' }}>
-          {/* Header */}
-          <div style={{ backgroundColor: NAVY, padding: '32px 64px 28px', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', right: -60, top: -60, width: 260, height: 260, borderRadius: '50%', border: `1px solid ${TEAL}12`, pointerEvents: 'none' }} />
-            <p style={{ color: TEAL, fontSize: '0.63rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 8px', fontFamily: 'Inter, sans-serif' }}>Quick wins</p>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
-              <h2 style={{ color: WHITE, fontSize: '2.2rem', fontWeight: 900, lineHeight: 1, margin: 0, fontFamily: 'Inter, sans-serif' }}>Begin morgen.</h2>
-              <p style={{ color: `${WHITE}50`, fontSize: '0.9rem', margin: 0, fontFamily: 'Inter, sans-serif' }}>Geen grote investering. Geen reorganisatie.</p>
-            </div>
-          </div>
-
-          {/* Table */}
-          <div style={{ flex: 1, padding: '20px 64px 28px', display: 'flex', flexDirection: 'column', gap: 0, overflow: 'hidden' }}>
-            {/* Column headers */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 88px 88px', padding: '0 16px 8px', gap: 8 }}>
-              <span />
-              {['Effort', 'Return'].map(h => (
-                <span key={h} style={{ color: MUTED, fontSize: '0.58rem', letterSpacing: '0.16em', textTransform: 'uppercase', fontWeight: 700, textAlign: 'center', fontFamily: 'Inter, sans-serif' }}>{h}</span>
-              ))}
-            </div>
-
-            {/* Section 1 — direct */}
-            <div style={{ background: `${TEAL}18`, borderRadius: '8px 8px 0 0', padding: '5px 16px', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: TEAL }} />
-              <span style={{ color: TEAL, fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>Direct starten — geen voorbereiding nodig</span>
-            </div>
-            {[
-              { title: 'AI meelezer', desc: 'Stuur AI een document, mail of voorstel. "Wat mist hier? Wat klopt niet?" Vijf minuten. Voor élk team.', effort: 1, ret: 2 },
-              { title: 'Kern uit een klantenvraag', desc: 'Geef AI de ruwe input van een klant. Laat het de essentie vatten: wat wil de klant écht, wat blijft impliciet?', effort: 1, ret: 3 },
-              { title: 'Blinde vlekken benoemen', desc: '"Wat kan er misgaan? Wat ontbreekt?" AI bedenkt systematisch de gaps en scenario\'s die u zou missen.', effort: 1, ret: 3 },
-            ].map((item, i, arr) => (
-              <div key={item.title} style={{ display: 'grid', gridTemplateColumns: '1fr 88px 88px', padding: '10px 16px', gap: 8, background: WHITE, marginBottom: i < arr.length - 1 ? 1 : 0, borderBottom: `1px solid ${BG}` }}>
-                <div>
-                  <p style={{ color: NAVY, fontSize: '0.88rem', fontWeight: 700, margin: '0 0 2px', fontFamily: 'Inter, sans-serif' }}>{item.title}</p>
-                  <p style={{ color: SLATE, fontSize: '0.78rem', lineHeight: 1.5, margin: 0, fontFamily: 'Inter, sans-serif' }}>{item.desc}</p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                  {[1,2,3].map(d => <span key={d} style={{ width: 8, height: 8, borderRadius: '50%', background: d <= item.effort ? SLATE : `${SLATE}20`, display: 'block' }} />)}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                  {[1,2,3,4].map(d => <span key={d} style={{ width: 8, height: 8, borderRadius: '50%', background: d <= item.ret ? TEAL : `${TEAL}20`, display: 'block' }} />)}
-                </div>
-              </div>
-            ))}
-
-            {/* Section 2 — requires foundation */}
-            <div style={{ background: `${BLUE}14`, padding: '5px 16px', marginTop: 10, display: 'flex', alignItems: 'center', gap: 8, borderRadius: '8px 8px 0 0' }}>
-              <div style={{ width: 6, height: 6, borderRadius: '50%', background: BLUE }} />
-              <span style={{ color: BLUE, fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>Met fundament — definieer eerst uw proces, dan doet AI het zware werk</span>
-            </div>
-            {[
-              { title: 'Offerte generatie', desc: 'Leg criteria vast: structuur, argumentatie, prijsbepaling. AI genereert vervolgens complete offertedraften — consistent en snel.', effort: 3, ret: 4 },
-              { title: 'Contract screening', desc: 'Definieer uw standaardvoorwaarden en risicovlaggen. AI screent elk binnenkomend contract automatisch op afwijkingen.', effort: 2, ret: 4 },
-              { title: 'Aanvraagvalidatie', desc: 'Beschrijf wat een complete briefing inhoudt. AI valideert meteen of alle informatie aanwezig is voor project-start.', effort: 2, ret: 3 },
-            ].map((item, i, arr) => (
-              <div key={item.title} style={{ display: 'grid', gridTemplateColumns: '1fr 88px 88px', padding: '10px 16px', gap: 8, background: WHITE, marginBottom: i < arr.length - 1 ? 1 : 0, borderBottom: `1px solid ${BG}` }}>
-                <div>
-                  <p style={{ color: NAVY, fontSize: '0.88rem', fontWeight: 700, margin: '0 0 2px', fontFamily: 'Inter, sans-serif' }}>{item.title}</p>
-                  <p style={{ color: SLATE, fontSize: '0.78rem', lineHeight: 1.5, margin: 0, fontFamily: 'Inter, sans-serif' }}>{item.desc}</p>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                  {[1,2,3].map(d => <span key={d} style={{ width: 8, height: 8, borderRadius: '50%', background: d <= item.effort ? SLATE : `${SLATE}20`, display: 'block' }} />)}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
-                  {[1,2,3,4].map(d => <span key={d} style={{ width: 8, height: 8, borderRadius: '50%', background: d <= item.ret ? BLUE : `${BLUE}20`, display: 'block' }} />)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <TestingEvolutie phase={1} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "De eerste drie kunt u morgen al doen. Geen nieuwe tools, geen reorganisatie. AI meelaten lezen op een document of offerte — dat kost vijf minuten en levert direct waarde op."<br/><br/>
-          "De tweede rij vraagt voorbereiding: beschrijf uw proces, uw criteria, uw regels. Maar eens dat fundament er ligt, doet AI het zware werk — consistent, snel, schaalbaar."<br/><br/>
-          "De offerte-case is een goed voorbeeld: als u vandaag tien offertes schrijft, schrijft u er morgen honderd — even goed."
+          "In Fase 1 wordt de QA-Engineer geholpen door AI. Scenario's schrijven gaat sneller, testdekking verbetert."<br/><br/>
+          "Maar de vraag 'klopt dit met de intent?' blijft bij de QA-Engineer. Met betere automatische dekking is er wel meer tijd voor de echte edge cases."
         </Notes>
       </Slide>
+
+      <Slide style={{ padding: 0, backgroundColor: BG }}>
+        <TestingEvolutie phase={2} />
+        <Notes>
+          <em>[Rubin]</em><br/><br/>
+          "In Fase 2 sluit de cirkel. De Gedragsscenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E testen. AI Agent genereert de testen, AIGeneer keurt goed."<br/><br/>
+          "En die vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase — hier controleer je enkel nog of de code doet wat beschreven staat. Eén investering in Gedragsscenario's betaalt dubbel."
+        </Notes>
+      </Slide>
+
 
       {/* ── Het spectrum ─────────────────────────────────────────────── */}
       <Slide style={SW}>
@@ -1395,7 +1126,7 @@ export default function Presentation() {
         {/* Contact footer — pinned to bottom, clearly separate */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: `1px solid ${WHITE}0e`, background: `${WHITE}05`, padding: '14px 64px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, backdropFilter: 'blur(4px)' }}>
           {[
-            { name: 'Berten De Schutter', org: 'Collide NV', email: 'berten@collide.be', color: TEAL },
+            { name: 'Berten De Schutter', org: 'Collide', email: 'berten@collide.be', color: TEAL },
             { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin@thevaluehub.be', color: BLUE },
           ].map(({ name, org, email, color }) => (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -1439,7 +1170,7 @@ export default function Presentation() {
         {/* Same contact footer */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: `1px solid ${WHITE}0e`, background: `${WHITE}05`, padding: '14px 64px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, backdropFilter: 'blur(4px)' }}>
           {[
-            { name: 'Berten De Schutter', org: 'Collide NV', email: 'berten@collide.be', color: TEAL },
+            { name: 'Berten De Schutter', org: 'Collide', email: 'berten@collide.be', color: TEAL },
             { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin@thevaluehub.be', color: BLUE },
           ].map(({ name, org, email, color }) => (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
