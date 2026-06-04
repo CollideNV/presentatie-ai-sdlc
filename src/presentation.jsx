@@ -718,103 +718,65 @@ export default function Presentation() {
         </Notes>
       </Slide>
 
-      {/* ── 3. Ons vibe coding experiment ───────────────────────────── */}
+      {/* ── 3a. Ons vibe coding experiment ──────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: WHITE }}>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', overflow: 'hidden' }}>
-
-          {/* Left — the story, no boxes */}
-          <div style={{
-            flex: '0 0 58%',
-            padding: '52px 56px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            gap: 0,
-            minWidth: 0,
-            boxSizing: 'border-box',
-          }}>
-            <p style={{ color: MUTED, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 20px', fontFamily: 'Inter, sans-serif' }}>
-              Ons eerste experiment
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box' }}>
+          <p style={{ color: MUTED, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 20px', fontFamily: 'Inter, sans-serif' }}>
+            Ons eerste experiment
+          </p>
+          <h2 style={{ color: NAVY, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 40px', fontFamily: 'Inter, sans-serif' }}>
+            Dus hebben we het gewoon geprobeerd.
+          </h2>
+          <div style={{ marginBottom: 28 }}>
+            <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>De verwachting</p>
+            <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>Snel resultaat, weinig werk.</p>
+            <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
+              Een werkende feature in een middag — zonder dat iemand er diep in moest duiken.
             </p>
-            <h2 style={{ color: NAVY, fontSize: '2.2rem', fontWeight: 900, lineHeight: 1.15, margin: '0 0 40px', fontFamily: 'Inter, sans-serif' }}>
-              Dus hebben we het<br />gewoon geprobeerd.
-            </h2>
-
-            {/* Act 1 */}
-            <div style={{ marginBottom: 28 }}>
-              <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>
-                De verwachting
-              </p>
-              <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>
-                Snel resultaat, weinig werk.
-              </p>
-              <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
-                {/* ⚠ Invullen: welk project, wat verwachtten jullie? */}
-                Een werkende feature in een middag — zonder dat iemand er diep in moest duiken.
-              </p>
-            </div>
-
-            {/* Connector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-              <div style={{ width: 20, height: 1, background: MUTED }} />
-              <p style={{ color: MUTED, fontSize: '0.7rem', fontWeight: 700, fontFamily: 'Inter, sans-serif', margin: 0, letterSpacing: '0.05em' }}>maar</p>
-              <div style={{ flex: 1, height: 1, background: `${MUTED}40` }} />
-            </div>
-
-            {/* Act 2 */}
-            <div>
-              <p style={{ color: SLATE, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>
-                De realiteit
-              </p>
-              <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>
-                Het werkte. En toen niet meer.
-              </p>
-              <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
-                {/* ⚠ Invullen: wat ging mis? Welk moment van "we begrijpen dit niet meer"? */}
-                De code deed iets, maar niemand begreep meer precies wat — of waarom.
-              </p>
-            </div>
           </div>
-
-          {/* Right — the punchline, dark panel */}
-          <div style={{
-            flex: 1,
-            minWidth: 0,
-            backgroundColor: NAVY,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '52px 48px',
-            boxSizing: 'border-box',
-          }}>
-            <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 20px', fontFamily: 'Inter, sans-serif' }}>
-              De les
-            </p>
-            <p style={{
-              color: WHITE,
-              fontSize: '1.75rem',
-              fontWeight: 800,
-              lineHeight: 1.3,
-              margin: '0 0 28px',
-              fontFamily: 'Inter, sans-serif',
-            }}>
-              Snel werkt.<br />Tot het niet meer werkt.
-            </p>
-            <p style={{ color: `${WHITE}77`, fontSize: '0.88rem', lineHeight: 1.7, margin: '0 0 36px', fontFamily: 'Inter, sans-serif' }}>
-              {/* ⚠ Invullen: wat was het keerpunt? */}
-              AI bouwt razendsnel — maar zonder inzicht verlies je algauw het overzicht.
-            </p>
-            <div style={{ height: 1, background: `${WHITE}15`, marginBottom: 28 }} />
-            <p style={{ color: `${WHITE}88`, fontSize: '0.85rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif', fontStyle: 'italic' }}>
-              Hoe combineer je die snelheid met de controle die je als team nodig hebt?
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+            <div style={{ width: 20, height: 1, background: MUTED }} />
+            <p style={{ color: MUTED, fontSize: '0.7rem', fontWeight: 700, fontFamily: 'Inter, sans-serif', margin: 0, letterSpacing: '0.05em' }}>maar</p>
+            <div style={{ flex: 1, height: 1, background: `${MUTED}40` }} />
+          </div>
+          <div>
+            <p style={{ color: SLATE, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>De realiteit</p>
+            <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>Het werkte. En toen niet meer.</p>
+            <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
+              De code deed iets, maar niemand begreep meer precies wat — of waarom.
             </p>
           </div>
         </div>
         <Notes>
-          <em>⚠ Vóór de presentatie invullen: welk project, wat ging goed, wat ging mis, wat was het keerpunt.</em><br/><br/>
           "We zijn het gewoon gaan doen. We hebben een prompt geschreven, AI laten werken, en in het begin was het... eigenlijk best indrukwekkend."<br/><br/>
-          "Maar op een bepaald moment stonden we voor een scherm vol code die niemand van ons nog helemaal kon doorgronden. AI had gebouwd, maar wij hadden geen controle meer."<br/><br/>
-          "De snelheid is reëel — maar zonder structuur is het geen vooruitgang. Het is schuld die je opbouwt."
+          "Maar op een bepaald moment stonden we voor een scherm vol code die niemand van ons nog helemaal kon doorgronden. AI had gebouwd, maar wij hadden geen controle meer."
+        </Notes>
+      </Slide>
+
+      {/* ── 3b. De les ───────────────────────────────────────────────── */}
+      <Slide style={{ padding: 0, backgroundColor: NAVY }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: NAVY, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${TEAL}18`, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${TEAL}10`, pointerEvents: 'none' }} />
+          <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>De les</p>
+          <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${TEAL}, ${TEAL}44)`, borderRadius: 2, marginBottom: 28 }} />
+          <p style={{ color: WHITE, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: 'Inter, sans-serif' }}>Snel werkt.<br/>Tot het niet meer werkt.</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            {[
+              'Je applicatie hangt vast bij de aanbieder.',
+              'De kosten lopen snel op.',
+              'Niemand begrijpt meer wat de code doet — of waarom.',
+            ].map((b, i) => (
+              <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ color: TEAL, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: 'Inter, sans-serif', flexShrink: 0 }}>—</span>
+                <p style={{ color: `${WHITE}CC`, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: 'Inter, sans-serif' }}>{b}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Notes>
+          "De snelheid is reëel — maar zonder structuur is het geen vooruitgang. Het is schuld die je opbouwt."<br/><br/>
+          "Hoe combineer je die snelheid met de controle die je als team nodig hebt?"
         </Notes>
       </Slide>
 
@@ -973,7 +935,7 @@ export default function Presentation() {
         <Notes>
           <em>[Berten]</em><br/><br/>
           "In Fase 1 gaat AI helpen bij het schrijven en testen. AI-assisted — de developer beslist nog steeds, maar gaat sneller."<br/><br/>
-          "De PR splitst in twee: AI Agent doet de snelle kwaliteitscheck. Dev Team focust enkel op wat AI niet begrijpt: context en intent. Kleinere vragen worden weggevangen vóór de human review."
+          "AI doet een eerste review — kwaliteit, consistentie, volledigheid. Daarna focust de developer enkel op wat AI niet begrijpt: context en intent. Kleinere vragen worden weggevangen vóór de human review."
         </Notes>
       </Slide>
 
