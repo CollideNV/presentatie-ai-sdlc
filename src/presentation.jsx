@@ -520,8 +520,7 @@ export default function Presentation() {
               overflow: 'hidden',
               alignSelf: 'flex-end',
             }}>
-              {/* Swap with: <img src="/rubin.jpg" style={{width:'100%',height:'100%',objectFit:'cover'}} /> */}
-              RB
+              <img src="/_JVR5052.jpg" alt="Rubin Beckers" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
 
             <p style={{ color: '#F0B23B', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 10px', fontFamily: 'Inter, sans-serif', textAlign: 'right' }}>
