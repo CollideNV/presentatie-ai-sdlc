@@ -30,8 +30,48 @@ const SW = { backgroundColor: WHITE, padding: '52px 72px' }
 
 // ── Requirements evolutie ────────────────────────────────────────────────────
 
+const GHERKIN = `Feature: Employee Management
+  As a logged-in user
+  I want to create, update, and delete employee records
+  So that the team roster stays accurate
+
+  Background:
+    Given I am logged in
+    And I am on the Employees page
+
+  # ── Creating an employee ──────────────────────────────────
+
+  Scenario: Opening the Add Employee modal
+    When I click the "Add Employee" button in the page header
+    Then the Employee Form modal opens in create mode
+    And the modal title is "Add Employee"
+    And all form fields are empty
+    And the first input (First Name) receives focus automatically`
+
+function gherkinLine(line, i) {
+  const tr = line.trimStart()
+  const pad = line.length - tr.length
+  const ws = ' '.repeat(pad)
+  if (tr.startsWith('#'))
+    return <div key={i}><span style={{ color: '#64748b' }}>{ws}{tr}</span></div>
+  const sectionKws = ['Feature:', 'Background:', 'Scenario:', 'Scenario Outline:', 'Examples:']
+  for (const kw of sectionKws)
+    if (tr.startsWith(kw))
+      return <div key={i}><span style={{ color: '#0d9488', fontWeight: 700 }}>{ws}{kw}</span><span style={{ color: '#e2e8f0' }}>{tr.slice(kw.length)}</span></div>
+  const narrativeKws = ['As a ', 'I want ', 'So that ']
+  for (const kw of narrativeKws)
+    if (tr.startsWith(kw))
+      return <div key={i}><span style={{ color: '#818cf8', fontStyle: 'italic' }}>{ws}{kw}</span><span style={{ color: '#c7d2fe', fontStyle: 'italic' }}>{tr.slice(kw.length)}</span></div>
+  const stepKws = ['Given ', 'When ', 'Then ', 'And ', 'But ']
+  for (const kw of stepKws)
+    if (tr.startsWith(kw))
+      return <div key={i}><span style={{ color: '#38bdf8', fontWeight: 600 }}>{ws}{kw}</span><span style={{ color: '#e2e8f0' }}>{tr.slice(kw.length)}</span></div>
+  return <div key={i}><span style={{ color: '#94a3b8' }}>{line || ' '}</span></div>
+}
+
 function RequirementsEvolutie({ phase }) {
   const ff = 'Inter, sans-serif'
+  const [showModal, setShowModal] = React.useState(false)
   const configs = [
     {
       dark: false, accent: SLATE,
@@ -88,6 +128,44 @@ function RequirementsEvolutie({ phase }) {
             </div>
           ))}
         </div>
+        {phase === 2 && (
+          <button onClick={() => setShowModal(true)} style={{
+            marginTop: 32, alignSelf: 'flex-start', background: 'none', border: `1px solid ${BLUE}55`,
+            borderRadius: 6, padding: '8px 18px', color: `${WHITE}99`, fontSize: '0.75rem',
+            letterSpacing: '0.06em', fontFamily: ff, cursor: 'pointer',
+          }}>
+            Zie voorbeeld gedragsscenario →
+          </button>
+        )}
+        {showModal && (
+          <div onClick={() => setShowModal(false)} style={{
+            position: 'fixed', inset: 0, zIndex: 1000,
+            background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <div onClick={e => e.stopPropagation()} style={{
+              background: '#0d1b2a', border: `1px solid ${TEAL}40`,
+              borderRadius: 12, padding: '32px 40px',
+              maxWidth: 680, width: '90%', position: 'relative',
+            }}>
+              <button onClick={() => setShowModal(false)} style={{
+                position: 'absolute', top: 12, right: 16,
+                background: 'none', border: 'none', color: `${WHITE}55`,
+                fontSize: '1.4rem', cursor: 'pointer', lineHeight: 1,
+              }}>×</button>
+              <p style={{ color: TEAL, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>
+                Voorbeeld gedragsscenario
+              </p>
+              <pre style={{
+                fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+                fontSize: '0.78rem', lineHeight: 1.75, margin: 0,
+                whiteSpace: 'pre', overflowX: 'auto',
+              }}>
+                {GHERKIN.split('\n').map((line, i) => gherkinLine(line, i))}
+              </pre>
+            </div>
+          </div>
+        )}
       </div>
       {/* Illustration panel — sprite sheet, one scene per phase */}
       <div style={{
@@ -479,7 +557,8 @@ export default function Presentation() {
             <h2 style={{ color: '#FAFAFE', fontSize: '2rem', fontWeight: 800, margin: '0 0 4px', fontFamily: 'Inter, sans-serif', lineHeight: 1.15 }}>
               Berten<br />De Schutter
             </h2>
-            <p style={{ color: '#37E284', fontSize: '1rem', fontWeight: 600, margin: '20px 0 0', fontFamily: 'Inter, sans-serif', letterSpacing: '0.03em' }}>
+            <img src="/logo-collide.svg" alt="Collide" style={{ height: 22, marginTop: 20, opacity: 0.9, alignSelf: 'flex-start' }} />
+            <p style={{ color: '#37E28480', fontSize: '0.92rem', margin: '8px 0 0', fontFamily: 'Inter, sans-serif', letterSpacing: '0.04em', alignSelf: 'flex-start' }}>
               collide.be
             </p>
           </div>
@@ -533,7 +612,8 @@ export default function Presentation() {
             <h2 style={{ color: '#181946', fontSize: '2rem', fontWeight: 800, margin: '0 0 4px', fontFamily: 'Inter, sans-serif', lineHeight: 1.15, textAlign: 'right' }}>
               Rubin<br />Beckers
             </h2>
-            <p style={{ color: '#F0B23B', fontSize: '1rem', fontWeight: 600, margin: '20px 0 0', fontFamily: 'Inter, sans-serif', letterSpacing: '0.03em', textAlign: 'right' }}>
+            <img src="/logo-thevaluehub.png" alt="The Value Hub" style={{ height: 28, marginTop: 20, opacity: 0.85 }} />
+            <p style={{ color: '#F0B23B80', fontSize: '0.92rem', margin: '8px 0 0', fontFamily: 'Inter, sans-serif', letterSpacing: '0.04em', textAlign: 'right' }}>
               thevaluehub.be
             </p>
           </div>
@@ -645,7 +725,7 @@ export default function Presentation() {
           </div>
         </div>
         <Notes>
-          <em>[Wijs naar het scherm]</em><br/><br/>
+          <em>[Rubin] [Wijs naar het scherm]</em><br/><br/>
           "U kent ze wel — die LinkedIn posts. Iemand bouwt een volledig platform in 47 minuten. Zonder developer. Gewoon prompts."<br/><br/>
           "En de comments stromen binnen: 'Waanzinnig!' 'Indrukwekkend!' '🔥'"<br/><br/>
           "Dus wat doen wij? We proberen het."
@@ -681,8 +761,12 @@ export default function Presentation() {
           </div>
         </div>
         <Notes>
+          <em>[Berten]</em><br/><br/>
           "We zijn het gewoon gaan doen. We hebben een prompt geschreven, AI laten werken, en in het begin was het... eigenlijk best indrukwekkend."<br/><br/>
-          "Maar al snel zagen we wat er in de praktijk gebeurt. Features die we nooit gevraagd hadden — maar AI vond ze een goed idee. Dezelfde functionaliteit op drie verschillende plekken in de app, ook drie keer geschreven in de code. Data die gewoon door de code werd samengesteld — alsof het klopte — maar nergens uit de database kwam. En op het einde: een kluwen van applicaties waarvan niemand meer wist hoe alles samenhing."<br/><br/>
+          <em>[Klik 1]</em> "Features die we nooit gevraagd hadden — maar AI vond ze een goed idee."<br/><br/>
+          <em>[Klik 2]</em> "Dezelfde functionaliteit op drie plekken in de app — ook drie keer in de code geschreven."<br/><br/>
+          <em>[Klik 3]</em> "Data die door de code zelf werd samengesteld — alsof het klopte — maar nergens uit de database kwam."<br/><br/>
+          <em>[Klik 4]</em> "Een kluwen van applicaties waarvan niemand meer wist hoe alles samenhing. Enkel AI wist nog hoe ze te starten."<br/><br/>
           "De code deed iets, maar niemand begreep meer precies wat — of waarom."
         </Notes>
       </Slide>
@@ -702,6 +786,7 @@ export default function Presentation() {
           </p>
         </div>
         <Notes>
+          <em>[Berten]</em><br/><br/>
           "De les was niet dat AI te snel gaat. De les was dat wij te weinig richting gaven."<br/><br/>
           "AI vult de leegte op. Als u niet zegt hoe de architectuur moet zijn, kiest AI er één. Als u niet zegt welke data uit de database moet komen, bedenkt AI iets. Als u niet zegt wat de scope is, bouwt AI verder."<br/><br/>
           "Guardrails zijn geen beperking — ze zijn de voorwaarde om AI nuttig te laten zijn."<br/><br/>
@@ -758,6 +843,7 @@ export default function Presentation() {
           </div>
         </div>
         <Notes>
+          <em>[Rubin]</em><br/><br/>
           "Na dat experiment stonden we voor een keuze: doorgaan met vibe coding, of teruggaan naar hoe we altijd hebben gewerkt. Maar er is een derde weg."<br/><br/>
           "De structuur die wij als IT-sector de afgelopen vijfendertig jaar hebben opgebouwd — requirements begrijpen, architectuur nadenken, testen, gestructureerd opleveren — die verdwijnt niet. Die wordt het stuur waarmee we AI aansturen."<br/><br/>
           "Snelheid van AI, gecombineerd met structuur die we al kennen. Dat is geen compromis — dat is het beste van beide werelden."
@@ -842,7 +928,7 @@ export default function Presentation() {
           </div>
         </div>
         <Notes>
-          <em>Rustig brengen — even laten landen.</em><br/><br/>
+          <em>[Berten] Rustig brengen — even laten landen.</em><br/><br/>
           "Je hebt misschien gemerkt dat we de afgelopen slides niet meer spraken over 'de analist doet dit' en 'de developer doet dat'."<br/><br/>
           "Dat is bewust. In onze manier van werken spreken we liever over AIGeneers — iemand die de volledige keten bewaakt, met AI als copiloot."<br/><br/>
           "Iemand die vroeger puur analyse deed, heeft nu ook technisch inzicht in wat er gebouwd moet worden. En een developer die vroeger nooit met een klant sprak, kan nu veel dichter op de functionele vraag zitten."<br/><br/>
@@ -963,7 +1049,7 @@ export default function Presentation() {
           </Text>
         </FlexBox>
         <Notes>
-          <em>[Rubin] Rustig brengen — laten landen.</em><br/><br/>
+          <em>[Berten] Rustig brengen — laten landen.</em><br/><br/>
           "Er bestaat een heel spectrum. En de meeste bedrijven die wij tegenkomen zitten ergens aan de linkerkant — niet omdat ze niet willen, maar omdat ze niet weten waar te beginnen."<br/><br/>
           "U heeft net gezien hoe het spectrum werkt in de praktijk. Nu de vraag: waar wilt ú staan? En hoe begint u?"
         </Notes>
@@ -1017,8 +1103,8 @@ export default function Presentation() {
         {/* Contact footer — pinned to bottom, clearly separate */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: `1px solid ${WHITE}0e`, background: `${WHITE}05`, padding: '14px 64px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, backdropFilter: 'blur(4px)' }}>
           {[
-            { name: 'Berten De Schutter', org: 'Collide', email: 'berten@collide.be', color: TEAL },
-            { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin@thevaluehub.be', color: BLUE },
+            { name: 'Berten De Schutter', org: 'Collide', email: 'berten.deschutter@collide.be', color: TEAL },
+            { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin.beckers@thevaluehub.be', color: BLUE },
           ].map(({ name, org, email, color }) => (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 4, height: 28, borderRadius: 2, background: color, opacity: 0.5, flexShrink: 0 }} />
@@ -1030,8 +1116,8 @@ export default function Presentation() {
           ))}
         </div>
         <Notes>
-          <em>[Samen in beeld]</em><br/><br/>
-          <em>[Rubin]</em> "U heeft vandaag genoeg gezien om te beginnen. Het enige wat ontbreekt is die eerste stap."<br/><br/>
+          <em>[Berten]</em><br/><br/>
+          "U heeft vandaag genoeg gezien om te beginnen. Het enige wat ontbreekt is die eerste stap."<br/><br/>
           "Kies één project. Begin deze week. Klein project? Begin zelf. Grotere ambitie — heel proces herdenken, team begeleiden? Dan helpen wij u graag."<br/><br/>
           <em>[Samen]</em> "We staan na de sessie beschikbaar. Onze contactgegevens staan op het scherm."
         </Notes>
@@ -1061,8 +1147,8 @@ export default function Presentation() {
         {/* Same contact footer */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: `1px solid ${WHITE}0e`, background: `${WHITE}05`, padding: '14px 64px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, backdropFilter: 'blur(4px)' }}>
           {[
-            { name: 'Berten De Schutter', org: 'Collide', email: 'berten@collide.be', color: TEAL },
-            { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin@thevaluehub.be', color: BLUE },
+            { name: 'Berten De Schutter', org: 'Collide', email: 'berten.deschutter@collide.be', color: TEAL },
+            { name: 'Rubin Beckers', org: 'The Value Hub', email: 'rubin.beckers@thevaluehub.be', color: BLUE },
           ].map(({ name, org, email, color }) => (
             <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 4, height: 28, borderRadius: 2, background: color, opacity: 0.5, flexShrink: 0 }} />
