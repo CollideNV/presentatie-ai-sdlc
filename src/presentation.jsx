@@ -606,7 +606,7 @@ export default function Presentation() {
             </div>
 
             <p style={{ color: '#F0B23B', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 10px', fontFamily: 'Inter, sans-serif', textAlign: 'right' }}>
-              Manager
+              Software Delivery Lead
             </p>
             <h2 style={{ color: '#181946', fontSize: '2rem', fontWeight: 800, margin: '0 0 4px', fontFamily: 'Inter, sans-serif', lineHeight: 1.15, textAlign: 'right' }}>
               Rubin<br />Beckers
