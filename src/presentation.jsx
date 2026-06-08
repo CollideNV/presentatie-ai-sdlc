@@ -35,7 +35,7 @@ function RequirementsEvolutie({ phase }) {
   const configs = [
     {
       dark: false, accent: SLATE,
-      eyebrow: '1 van 3 · Requirements — Vroeger',
+      eyebrow: '1 van 3 · Requirements — Voor AI',
       headline: 'Één reviewer. Alle vragen tegelijk.',
       bullets: [
         'Tech Team reviewt kwaliteit, functioneel én intent in één reviewmoment.',
@@ -120,11 +120,11 @@ function CodeEvolutie({ phase }) {
   const configs = [
     {
       dark: false, accent: SLATE,
-      eyebrow: '2 van 3 · Code-ontwikkeling — Vroeger',
+      eyebrow: '2 van 3 · Code-ontwikkeling — Voor AI',
       headline: 'Developer doet alles zelf.',
       bullets: [
-        'Van technische analyse tot pull request: één persoon, alles tegelijk.',
-        'PR als enig veiligheidsnet: kwaliteit, context en architectuur — allemaal tegelijk beoordeeld.',
+        'Van technische analyse tot Peer Review: één persoon, alles tegelijk.',
+        'Peer Review als enig veiligheidsnet: kwaliteit, context en architectuur — allemaal tegelijk beoordeeld.',
         'Hoog volume, hoge mentale belasting, trage feedback loop.',
       ],
     },
@@ -134,8 +134,8 @@ function CodeEvolutie({ phase }) {
       headline: 'AI versnelt de uitvoering.',
       bullets: [
         'Implementatie en testen AI-assisted: developer stuurt, AI voert uit.',
-        'PR gesplitst: AI Agent doet de snelle kwaliteitscheck, Dev Team focust op context en intent.',
-        'Minder boilerplate schrijven — meer tijd voor wat écht telt.',
+        'Peer Review gesplitst: AI Agent doet de snelle kwaliteitscheck, Dev Team focust op context en intent.',
+        'Minder routinewerk schrijven — meer tijd voor wat écht telt.',
       ],
     },
     {
@@ -144,7 +144,7 @@ function CodeEvolutie({ phase }) {
       headline: 'AI Agent schrijft en test de code.',
       bullets: [
         "AI Agent implementeert volledig op basis van Gedragsscenario's — inclusief automatische testen.",
-        'AIGeneer bepaalt de architectuur en keurt goed via de PR deep-dive.',
+        'AIGeneer bepaalt de architectuur en keurt goed via de Peer Review deep-dive.',
         'Geen diepgaande technische kennis vereist. De driving seat blijft bij de mens.',
       ],
     },
@@ -277,7 +277,7 @@ function TestingEvolutie({ phase }) {
   const configs = [
     {
       dark: false, accent: SLATE,
-      eyebrow: '3 van 3 · Testing & Delivery — Vroeger',
+      eyebrow: '3 van 3 · Testing & Delivery — Voor AI',
       headline: 'Vakwerk. Maar laat en arbeidsintensief.',
       bullets: [
         "Requirements en testscenario's werden zorgvuldig opgesteld — door mensen met kennis van zaken, maar op twee aparte sporen.",
@@ -732,7 +732,7 @@ export default function Presentation() {
 
             <p style={{ color: `${WHITE}88`, fontSize: '1.05rem', lineHeight: 1.8, margin: '0 0 48px', fontFamily: 'Inter, sans-serif' }}>
               Vijfendertig jaar IT-projecten hebben ons geleerd wat softwarelevering doet slagen.
-              Niet als theorie — in de praktijk, keer op keer.
+              Niet als theorie — in de praktijk, keer op keer. <span style={{ color: `${WHITE}55`, fontSize: '0.85em' }}>(Cronos Groep, opgericht 1991)</span>
             </p>
 
             {/* Pillars — inline, no boxes */}
@@ -825,7 +825,7 @@ export default function Presentation() {
 
             <div style={{ display: 'flex', justifyContent: 'center', gap: 0, marginBottom: 48 }}>
               <div style={{ textAlign: 'center', padding: '0 36px', borderRight: `1px solid ${WHITE}15` }}>
-                <p style={{ color: MUTED, fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>Vroeger</p>
+                <p style={{ color: MUTED, fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>Voor AI</p>
                 <p style={{ color: `${WHITE}55`, fontSize: '0.88rem', fontFamily: 'Inter, sans-serif', margin: 0 }}>Analist · Architect · Developer · QA</p>
               </div>
               <div style={{ textAlign: 'center', padding: '0 36px' }}>
@@ -855,7 +855,7 @@ export default function Presentation() {
         <CodeEvolutie phase={0} />
         <Notes>
           <em>[Berten]</em><br/><br/>
-          "Vroeger deed de developer alles zelf: analyse, schrijven, testen, pull request. Eén kwaliteitscheck aan het einde — door het Dev Team. Alles op hetzelfde moment: kwaliteit, context, architectuur, intent."
+          "Voor AI deed de developer alles zelf: analyse, schrijven, testen, Peer Review. Eén kwaliteitscheck aan het einde — door het Dev Team. Alles op hetzelfde moment: kwaliteit, context, architectuur, intent."
         </Notes>
       </Slide>
 
@@ -882,7 +882,7 @@ export default function Presentation() {
         <TestingEvolutie phase={0} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "Vroeger schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan automatische testen draaien, manuele verificatie."<br/><br/>
+          "Voor AI schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan automatische testen draaien, manuele verificatie."<br/><br/>
           "En de vraag 'is dit wat de klant bedoelde?' landde steeds bij de QA-Engineer, op het einde van het proces. Als het antwoord 'nee' was, was de kostprijs hoog."
         </Notes>
       </Slide>
