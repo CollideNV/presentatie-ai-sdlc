@@ -1,6 +1,6 @@
  import React from 'react'
 import {
-  Deck, Slide, Heading, Text, Notes, FlexBox, Box, DeckContext,
+  Deck, Slide, Heading, Text, Notes, FlexBox, Box, DeckContext, Appear,
 } from 'spectacle'
 import { theme, NAVY, SLATE, MUTED, TEAL, BLUE, BG, WHITE, BORDER } from './theme.js'
 
@@ -671,10 +671,12 @@ export default function Presentation() {
               'Data samengesteld door de code zelf — in plaats van uit de database opgehaald.',
               'Een kluwen van applicaties waarvan enkel AI wist hoe ze te starten — architectuur die niemand meer begreep.',
             ].map((b, i) => (
-              <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ color: TEAL, fontSize: '1.1rem', lineHeight: 1.55, fontFamily: 'Inter, sans-serif', flexShrink: 0 }}>—</span>
-                <p style={{ color: SLATE, fontSize: '0.98rem', lineHeight: 1.6, margin: 0, fontFamily: 'Inter, sans-serif' }}>{b}</p>
-              </div>
+              <Appear key={i}>
+                <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                  <span style={{ color: TEAL, fontSize: '1.1rem', lineHeight: 1.55, fontFamily: 'Inter, sans-serif', flexShrink: 0 }}>—</span>
+                  <p style={{ color: SLATE, fontSize: '0.98rem', lineHeight: 1.6, margin: 0, fontFamily: 'Inter, sans-serif' }}>{b}</p>
+                </div>
+              </Appear>
             ))}
           </div>
         </div>
