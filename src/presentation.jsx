@@ -60,7 +60,7 @@ function RequirementsEvolutie({ phase }) {
       bullets: [
         "Requirements én Gedragsscenario's worden door de AIGeneer opgesteld — AI Agent valideert de volledigheid.",
         'AIGeneer blijft eindverantwoordelijk: AI ondersteunt, mens beslist.',
-        "De cirkel sluit: Gedragsscenario's worden de basis voor tests in stap 3.",
+        "Wat je nu schrijft, wordt straks ook de basis voor je testen — één investering, twee keer rendement.",
       ],
     },
   ]
@@ -70,21 +70,42 @@ function RequirementsEvolutie({ phase }) {
   const textColor = c.dark ? `${WHITE}CC` : SLATE
   const eyebrowColor = c.dark ? c.accent : MUTED
   return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
-      {c.dark && <>
-        <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
-      </>}
-      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
-      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
-      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-        {c.bullets.map((b, i) => (
-          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
-            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
-          </div>
-        ))}
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', overflow: 'hidden' }}>
+      {/* Content column */}
+      <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 80px', boxSizing: 'border-box', minWidth: 0 }}>
+        {c.dark && <>
+          <div style={{ position: 'absolute', right: -60, top: -60, width: 300, height: 300, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', right: 20, top: 20, width: 160, height: 160, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
+        </>}
+        <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+        <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+        <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '90%' }}>{c.headline}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          {c.bullets.map((b, i) => (
+            <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+              <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+              <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Illustration panel — sprite sheet, one scene per phase */}
+      <div style={{
+        width: '36%',
+        flexShrink: 0,
+        position: 'relative',
+        overflow: 'hidden',
+        borderLeft: c.dark ? `1px solid ${c.accent}18` : `1px solid ${SLATE}15`,
+      }}>
+        <img alt="" src="/Gemini_Generated_Image_hhm3vwhhm3vwhhm3.png" style={{
+          width: 'auto',
+          height: '300%',
+          position: 'absolute',
+          top: `${-phase * 100}%`,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'block',
+        }} />
       </div>
     </div>
   )
@@ -132,24 +153,116 @@ function CodeEvolutie({ phase }) {
   const headlineColor = c.dark ? WHITE : NAVY
   const textColor = c.dark ? `${WHITE}CC` : SLATE
   const eyebrowColor = c.dark ? c.accent : MUTED
+  const cornerImgs = ['/img.png', '/img_1.png', '/img_3.png']
+  const cornerImg = cornerImgs[phase]
   return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, overflow: 'hidden' }}>
+      {/* Decorative circles for dark slides */}
       {c.dark && <>
         <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
       </>}
-      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
-      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
-      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-        {c.bullets.map((b, i) => (
-          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
-            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
-          </div>
-        ))}
+      {/* Corner background image */}
+      {cornerImg && <img alt="" src={cornerImg} style={{
+        position: 'absolute', bottom: -80, right: -80,
+        width: 520, height: 520,
+        opacity: 0.50, pointerEvents: 'none',
+      }} />}
+      {/* Content */}
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', padding: '52px 96px', boxSizing: 'border-box' }}>
+        <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+        <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+        <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '68%' }}>{c.headline}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: '65%' }}>
+          {c.bullets.map((b, i) => (
+            <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+              <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+              <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
+  )
+}
+
+// ── Testing timeline SVG ─────────────────────────────────────────────────────
+
+function TestingTimeline({ phase, dark }) {
+  const ff = 'Inter, sans-serif'
+  const W = 1200, H = 110, Y = 44
+  const nodes = [
+    { x: 100,  label: 'Requirements' },
+    { x: 390,  label: 'Development'  },
+    { x: 720,  label: 'Testing'      },
+    { x: 1060, label: 'Delivery'     },
+  ]
+  const mutedLine  = dark ? 'rgba(255,255,255,0.15)' : 'rgba(71,85,105,0.22)'
+  const mutedDot   = dark ? 'rgba(255,255,255,0.20)' : 'rgba(71,85,105,0.28)'
+  const labelColor = dark ? 'rgba(255,255,255,0.38)' : 'rgba(71,85,105,0.55)'
+
+  const segColor = (i) => {
+    if (phase === 0) return i === 2 ? 'rgba(239,68,68,0.55)' : mutedLine
+    if (phase === 1) return i >= 1 ? 'rgba(13,148,136,0.45)' : mutedLine
+    return 'rgba(34,197,94,0.55)'
+  }
+
+  const nodeStyle = (i) => {
+    if (phase === 0) {
+      if (i === 3) return { r: 16, fill: null, stroke: '#ef4444', sw: 2.5, icon: '!', ic: '#ef4444' }
+      return { r: 5, fill: mutedDot, stroke: null, sw: 0, icon: null }
+    }
+    if (phase === 1) {
+      if (i === 1) return { r: 14, fill: '#0d9488', stroke: null, sw: 0, icon: '✓', ic: '#fff' }
+      if (i === 2) return { r: 14, fill: '#0d9488', stroke: null, sw: 0, icon: '✓', ic: '#fff' }
+      if (i === 3) return { r: 8,  fill: null, stroke: 'rgba(13,148,136,0.4)', sw: 2, icon: null }
+      return { r: 5, fill: mutedDot, stroke: null, sw: 0, icon: null }
+    }
+    return { r: 14, fill: '#22c55e', stroke: null, sw: 0, icon: '✓', ic: '#fff' }
+  }
+
+  return (
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} style={{ fontFamily: ff, display: 'block' }}>
+      {nodes.slice(0, -1).map((n, i) => (
+        <line key={i} x1={n.x} y1={Y} x2={nodes[i + 1].x} y2={Y}
+          stroke={segColor(i)} strokeWidth={2}
+          strokeDasharray={phase === 0 && i === 2 ? '7 5' : undefined} />
+      ))}
+      {nodes.map((node, i) => {
+        const s = nodeStyle(i)
+        return (
+          <g key={i}>
+            {s.fill
+              ? <circle cx={node.x} cy={Y} r={s.r} fill={s.fill} />
+              : <circle cx={node.x} cy={Y} r={s.r} fill="none" stroke={s.stroke} strokeWidth={s.sw} />}
+            {s.icon && (
+              <text x={node.x} y={Y + 5} textAnchor="middle" fill={s.ic}
+                fontSize={s.icon === '!' ? 14 : 12} fontWeight="bold">{s.icon}</text>
+            )}
+            <text x={node.x} y={Y + s.r + 18} textAnchor="middle"
+              fill={labelColor} fontSize={10.5} letterSpacing="0.04em">{node.label}</text>
+          </g>
+        )
+      })}
+      {phase === 0 && (
+        <text x={1060} y={Y - 26} textAnchor="middle" fill="#ef4444"
+          fontSize={10} opacity={0.8} letterSpacing="0.08em">LAAT ONTDEKT</text>
+      )}
+      {phase === 1 && (
+        <g>
+          <rect x={511} y={Y - 38} width={88} height={19} rx={3} fill="#0d9488" fillOpacity={0.15} />
+          <text x={555} y={Y - 24} textAnchor="middle" fill="#0d9488"
+            fontSize={9.5} letterSpacing="0.1em">AI‑ASSISTED</text>
+        </g>
+      )}
+      {phase === 2 && (
+        <g>
+          <rect x={1016} y={Y - 38} width={88} height={19} rx={3} fill="#22c55e" fillOpacity={0.15} />
+          <text x={1060} y={Y - 24} textAnchor="middle" fill="#22c55e"
+            fontSize={9.5} letterSpacing="0.1em">CI/CD AUTO</text>
+        </g>
+      )}
+    </svg>
   )
 }
 
@@ -161,11 +274,11 @@ function TestingEvolutie({ phase }) {
     {
       dark: false, accent: SLATE,
       eyebrow: '3 van 3 · Testing & Delivery — Vroeger',
-      headline: 'Dubbel werk. Late verificatie.',
+      headline: 'Vakwerk. Maar laat en arbeidsintensief.',
       bullets: [
-        "Requirements en testscenario's worden apart opgesteld — twee sporen, twee keer werk.",
-        '"Is dit wat de klant wil?" komt pas aan het einde van het traject.',
-        'Als het antwoord nee is, is de kostprijs hoog.',
+        "Requirements en testscenario's werden zorgvuldig opgesteld — door mensen met kennis van zaken, maar op twee aparte sporen.",
+        'Verificatie gebeurde aan het einde van het traject — pas daar wist je zeker of het klopte.',
+        'Hoe later een fout opduikt, hoe duurder de oplossing. Dat is geen verwijt — dat is gewoon hoe het werkt.',
       ],
     },
     {
@@ -181,7 +294,7 @@ function TestingEvolutie({ phase }) {
     {
       dark: true, accent: BLUE,
       eyebrow: '3 van 3 · Testing & Delivery — Fase 2',
-      headline: 'De cirkel sluit.',
+      headline: 'Alles komt samen.',
       bullets: [
         "Gedragsscenario's uit stap 1 zijn de bron: AI Agent genereert alle E2E testen automatisch.",
         '"Is dit wat de klant wil?" werd al beantwoord in de requirements fase — niet op het einde.',
@@ -195,21 +308,26 @@ function TestingEvolutie({ phase }) {
   const textColor = c.dark ? `${WHITE}CC` : SLATE
   const eyebrowColor = c.dark ? c.accent : MUTED
   return (
-    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', inset: 0, backgroundColor: bg, overflow: 'hidden' }}>
       {c.dark && <>
         <div style={{ position: 'absolute', right: -80, top: -80, width: 420, height: 420, borderRadius: '50%', border: `1px solid ${c.accent}18`, pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${c.accent}10`, pointerEvents: 'none' }} />
       </>}
-      <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
-      <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
-      <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-        {c.bullets.map((b, i) => (
-          <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-            <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
-            <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
-          </div>
-        ))}
+      <div style={{ position: 'absolute', bottom: 36, left: 0, right: 0, pointerEvents: 'none', opacity: 0.65 }}>
+        <TestingTimeline phase={phase} dark={c.dark} />
+      </div>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', padding: '52px 96px 160px', boxSizing: 'border-box' }}>
+        <p style={{ color: eyebrowColor, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>{c.eyebrow}</p>
+        <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${c.accent}, ${c.accent}44)`, borderRadius: 2, marginBottom: 28 }} />
+        <p style={{ color: headlineColor, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: ff, maxWidth: '78%' }}>{c.headline}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: '65%' }}>
+          {c.bullets.map((b, i) => (
+            <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+              <span style={{ color: c.accent, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: ff, flexShrink: 0 }}>—</span>
+              <p style={{ color: textColor, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: ff }}>{b}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -777,7 +895,7 @@ export default function Presentation() {
         <TestingEvolutie phase={2} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "In Fase 2 sluit de cirkel. De Gedragsscenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E testen. AI Agent genereert de testen, AIGeneer keurt goed."<br/><br/>
+          "In Fase 2 komt alles samen. De Gedragsscenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E testen. AI Agent genereert de testen, AIGeneer keurt goed."<br/><br/>
           "En die vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase — hier controleer je enkel nog of de code doet wat beschreven staat. Eén investering in Gedragsscenario's betaalt dubbel."
         </Notes>
       </Slide>
