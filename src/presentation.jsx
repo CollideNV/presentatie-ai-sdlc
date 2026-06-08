@@ -1,6 +1,6 @@
-import React from 'react'
+ import React from 'react'
 import {
-  Deck, Slide, Heading, Text, Notes, FlexBox, Box, UnorderedList, ListItem, Grid, useSteps, DeckContext,
+  Deck, Slide, Heading, Text, Notes, FlexBox, Box, DeckContext,
 } from 'spectacle'
 import { theme, NAVY, SLATE, MUTED, TEAL, BLUE, BG, WHITE, BORDER } from './theme.js'
 
@@ -15,17 +15,6 @@ const G = ({ children, from = TEAL, to = BLUE }) => (
   }}>{children}</span>
 )
 
-const EyebrowLabel = ({ children, color = TEAL }) => (
-  <Text style={{
-    color,
-    fontSize: '0.65rem',
-    letterSpacing: '0.2em',
-    textTransform: 'uppercase',
-    fontWeight: 700,
-    marginBottom: 14,
-  }}>{children}</Text>
-)
-
 const Rule = ({ color = TEAL, width = 40 }) => (
   <Box style={{
     height: 3,
@@ -36,80 +25,8 @@ const Rule = ({ color = TEAL, width = 40 }) => (
   }} />
 )
 
-const Card = ({ children, accent = TEAL, style = {} }) => (
-  <Box style={{
-    background: WHITE,
-    borderRadius: 12,
-    padding: '24px 28px',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.05)',
-    borderTop: `3px solid ${accent}`,
-    ...style,
-  }}>{children}</Box>
-)
-
-const QuoteBlock = ({ children }) => (
-  <Box style={{
-    background: WHITE,
-    borderRadius: 10,
-    padding: '24px 32px',
-    borderLeft: `4px solid ${TEAL}`,
-    boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-    maxWidth: '78%',
-  }}>
-    <Text style={{ color: NAVY, fontSize: '1.2rem', fontStyle: 'italic', lineHeight: 1.6 }}>
-      {children}
-    </Text>
-  </Box>
-)
-
-const TwoCol = ({ left, right, gap = '40px' }) => (
-  <Grid gridTemplateColumns="1fr 1fr" gridColumnGap={gap} style={{ width: '100%', marginTop: 28 }}>
-    <Box>{left}</Box>
-    <Box>{right}</Box>
-  </Grid>
-)
-
-const ThreeCol = ({ cols }) => (
-  <Grid gridTemplateColumns="1fr 1fr 1fr" gridColumnGap="24px" style={{ width: '100%', marginTop: 28 }}>
-    {cols.map((c, i) => <Box key={i}>{c}</Box>)}
-  </Grid>
-)
-
-const Pill = ({ children, color = TEAL }) => (
-  <Box style={{
-    display: 'inline-block',
-    background: `${color}14`,
-    border: `1px solid ${color}30`,
-    borderRadius: 100,
-    padding: '4px 14px',
-    marginBottom: 16,
-  }}>
-    <Text style={{ color, fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-      {children}
-    </Text>
-  </Box>
-)
-
-const BigNumber = ({ n, color = TEAL }) => (
-  <Text style={{
-    color: `${color}20`,
-    fontSize: '5.5rem',
-    fontWeight: 900,
-    lineHeight: 1,
-    minWidth: 72,
-    fontFamily: 'Inter, sans-serif',
-    userSelect: 'none',
-  }}>{n}</Text>
-)
-
-const ColumnDivider = () => (
-  <Box style={{ width: 1, background: BORDER, margin: '0 32px', alignSelf: 'stretch' }} />
-)
-
 // ── Slide base styles ───────────────────────────────────────────────────────
-const S  = { backgroundColor: BG,    padding: '52px 72px' }
 const SW = { backgroundColor: WHITE, padding: '52px 72px' }
-const SD = { backgroundColor: NAVY,  padding: '52px 72px' }
 
 // ── Requirements evolutie ────────────────────────────────────────────────────
 
@@ -298,110 +215,6 @@ function TestingEvolutie({ phase }) {
   )
 }
 
-
-// ── Begin morgen — card deck ─────────────────────────────────────────────────
-
-function BeginMorgenCards() {
-  const { step, placeholder } = useSteps(5)
-  const ff = 'Inter, sans-serif'
-
-  const examples = [
-    { section: 'Direct starten', color: TEAL, effort: 1, ret: 2, title: 'AI meelezer', desc: 'Stuur AI een document, mail of voorstel. "Wat mist hier? Wat klopt niet?" Vijf minuten. Voor élk team.' },
-    { section: 'Direct starten', color: TEAL, effort: 1, ret: 3, title: 'Kern uit een klantenvraag', desc: 'Geef AI de ruwe input van een klant. Laat het de essentie vatten: wat wil de klant écht, wat blijft impliciet?' },
-    { section: 'Direct starten', color: TEAL, effort: 1, ret: 3, title: 'Blinde vlekken benoemen', desc: '"Wat kan er misgaan? Wat ontbreekt?" AI bedenkt systematisch de gaps en scenario\'s die u zou missen.' },
-    { section: 'Met fundament', color: BLUE, effort: 3, ret: 4, title: 'Offerte generatie', desc: 'Leg criteria vast: structuur, argumentatie, prijsbepaling. AI genereert vervolgens complete offertedraften — consistent en snel.' },
-    { section: 'Met fundament', color: BLUE, effort: 2, ret: 4, title: 'Contract screening', desc: 'Definieer uw standaardvoorwaarden en risicovlaggen. AI screent elk binnenkomend contract automatisch op afwijkingen.' },
-    { section: 'Met fundament', color: BLUE, effort: 2, ret: 3, title: 'Aanvraagvalidatie', desc: 'Beschrijf wat een complete briefing inhoudt. AI valideert meteen of alle informatie aanwezig is voor project-start.' },
-  ]
-
-  return (
-    <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column' }}>
-      {/* Header */}
-      <div style={{ backgroundColor: NAVY, padding: '28px 64px 24px', flexShrink: 0, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', right: -60, top: -60, width: 260, height: 260, borderRadius: '50%', border: `1px solid ${TEAL}12`, pointerEvents: 'none' }} />
-        <p style={{ color: TEAL, fontSize: '0.63rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 8px', fontFamily: ff }}>Quick wins</p>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
-          <h2 style={{ color: WHITE, fontSize: '2.2rem', fontWeight: 900, lineHeight: 1, margin: 0, fontFamily: ff }}>Begin morgen.</h2>
-          <p style={{ color: `${WHITE}50`, fontSize: '0.9rem', margin: 0, fontFamily: ff }}>Geen grote investering. Geen reorganisatie.</p>
-        </div>
-      </div>
-
-      {/* Card stack */}
-      <div style={{ flex: 1, backgroundColor: BG, display: 'flex', flexDirection: 'column', padding: '20px 64px 16px' }}>
-        <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {examples.map((ex, i) => {
-            const pos = i - (step + 1)
-            if (pos > 2 || pos < 0) return null
-            const isCurrent = pos === 0
-            return (
-              <div key={ex.title} style={{
-                position: 'absolute',
-                width: `${88 - pos * 4}%`,
-                transform: `scale(${1 - pos * 0.025}) translateY(${pos * 18}px)`,
-                zIndex: 10 - pos,
-                transition: 'transform 0.35s ease, opacity 0.35s ease, width 0.35s ease',
-                pointerEvents: isCurrent ? 'auto' : 'none',
-              }}>
-                <div style={{
-                  background: WHITE,
-                  borderRadius: 14,
-                  padding: isCurrent ? '32px 40px' : '24px 32px',
-                  boxShadow: isCurrent ? `0 6px 28px rgba(0,0,0,0.10), 0 0 0 1px ${BORDER}` : `0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px ${BORDER}`,
-                  borderTop: `4px solid ${ex.color}`,
-                  opacity: isCurrent ? 1 : 0.45,
-                  transition: 'all 0.35s ease',
-                }}>
-                  {isCurrent && (<>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                      <span style={{ background: `${ex.color}14`, border: `1px solid ${ex.color}30`, borderRadius: 100, padding: '3px 12px' }}>
-                        <span style={{ color: ex.color, fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: ff }}>{ex.section}</span>
-                      </span>
-                      <span style={{ color: MUTED, fontSize: '0.72rem', fontFamily: ff }}>{i + 1} / {examples.length}</span>
-                    </div>
-                    <p style={{ color: NAVY, fontSize: '1.35rem', fontWeight: 800, margin: '0 0 10px', fontFamily: ff, lineHeight: 1.2 }}>{ex.title}</p>
-                    <p style={{ color: SLATE, fontSize: '0.88rem', lineHeight: 1.65, margin: '0 0 20px', fontFamily: ff }}>{ex.desc}</p>
-                    <div style={{ display: 'flex', gap: 32 }}>
-                      <div>
-                        <p style={{ color: MUTED, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Effort</p>
-                        <div style={{ display: 'flex', gap: 5 }}>
-                          {[1,2,3].map(d => <span key={d} style={{ width: 10, height: 10, borderRadius: '50%', background: d <= ex.effort ? SLATE : `${SLATE}20`, display: 'block' }} />)}
-                        </div>
-                      </div>
-                      <div>
-                        <p style={{ color: MUTED, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: ff }}>Return</p>
-                        <div style={{ display: 'flex', gap: 5 }}>
-                          {[1,2,3,4].map(d => <span key={d} style={{ width: 10, height: 10, borderRadius: '50%', background: d <= ex.ret ? ex.color : `${ex.color}20`, display: 'block' }} />)}
-                        </div>
-                      </div>
-                    </div>
-                  </>)}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Progress dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, paddingTop: 8, flexShrink: 0 }}>
-          {examples.map((ex, i) => {
-            const cur = step + 1
-            return (
-              <div key={i} style={{
-                width: i === cur ? 28 : 8,
-                height: 8,
-                borderRadius: 4,
-                background: i < cur ? `${ex.color}50` : i === cur ? ex.color : `${TEAL}20`,
-                transition: 'all 0.3s ease',
-              }} />
-            )
-          })}
-        </div>
-      </div>
-
-      {placeholder}
-    </div>
-  )
-}
 
 // ── Presentation ────────────────────────────────────────────────────────────
 
@@ -721,35 +534,33 @@ export default function Presentation() {
       {/* ── 3a. Ons vibe coding experiment ──────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: WHITE }}>
         <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '52px 96px', boxSizing: 'border-box' }}>
-          <p style={{ color: MUTED, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 20px', fontFamily: 'Inter, sans-serif' }}>
+          <p style={{ color: MUTED, fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>
             Ons eerste experiment
           </p>
-          <h2 style={{ color: NAVY, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 40px', fontFamily: 'Inter, sans-serif' }}>
+          <h2 style={{ color: NAVY, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 12px', fontFamily: 'Inter, sans-serif' }}>
             Dus hebben we het gewoon geprobeerd.
           </h2>
-          <div style={{ marginBottom: 28 }}>
-            <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>De verwachting</p>
-            <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>Snel resultaat, weinig werk.</p>
-            <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
-              Een werkende feature in een middag — zonder dat iemand er diep in moest duiken.
-            </p>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-            <div style={{ width: 20, height: 1, background: MUTED }} />
-            <p style={{ color: MUTED, fontSize: '0.7rem', fontWeight: 700, fontFamily: 'Inter, sans-serif', margin: 0, letterSpacing: '0.05em' }}>maar</p>
-            <div style={{ flex: 1, height: 1, background: `${MUTED}40` }} />
-          </div>
-          <div>
-            <p style={{ color: SLATE, fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>De realiteit</p>
-            <p style={{ color: NAVY, fontSize: '1.05rem', fontWeight: 600, margin: '0 0 4px', fontFamily: 'Inter, sans-serif' }}>Het werkte. En toen niet meer.</p>
-            <p style={{ color: SLATE, fontSize: '0.9rem', lineHeight: 1.65, margin: 0, fontFamily: 'Inter, sans-serif' }}>
-              De code deed iets, maar niemand begreep meer precies wat — of waarom.
-            </p>
+          <p style={{ color: SLATE, fontSize: '0.95rem', lineHeight: 1.65, margin: '0 0 32px', fontFamily: 'Inter, sans-serif' }}>
+            In het begin was het indrukwekkend. Maar al snel merkten we wat vibe coding in de praktijk betekent:
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {[
+              'Features die we nooit gevraagd hadden — maar wel gebouwd werden.',
+              'Functionaliteit op meerdere plaatsen in de app, en ook op meerdere plaatsen in de code.',
+              'Data samengesteld door de code zelf — in plaats van uit de database opgehaald.',
+              'Een kluwen van applicaties waarvan enkel AI wist hoe ze te starten — architectuur die niemand meer begreep.',
+            ].map((b, i) => (
+              <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ color: TEAL, fontSize: '1.1rem', lineHeight: 1.55, fontFamily: 'Inter, sans-serif', flexShrink: 0 }}>—</span>
+                <p style={{ color: SLATE, fontSize: '0.98rem', lineHeight: 1.6, margin: 0, fontFamily: 'Inter, sans-serif' }}>{b}</p>
+              </div>
+            ))}
           </div>
         </div>
         <Notes>
           "We zijn het gewoon gaan doen. We hebben een prompt geschreven, AI laten werken, en in het begin was het... eigenlijk best indrukwekkend."<br/><br/>
-          "Maar op een bepaald moment stonden we voor een scherm vol code die niemand van ons nog helemaal kon doorgronden. AI had gebouwd, maar wij hadden geen controle meer."
+          "Maar al snel zagen we wat er in de praktijk gebeurt. Features die we nooit gevraagd hadden — maar AI vond ze een goed idee. Dezelfde functionaliteit op drie verschillende plekken in de app, ook drie keer geschreven in de code. Data die gewoon door de code werd samengesteld — alsof het klopte — maar nergens uit de database kwam. En op het einde: een kluwen van applicaties waarvan niemand meer wist hoe alles samenhing."<br/><br/>
+          "De code deed iets, maar niemand begreep meer precies wat — of waarom."
         </Notes>
       </Slide>
 
@@ -760,23 +571,18 @@ export default function Presentation() {
           <div style={{ position: 'absolute', right: 40, top: 40, width: 220, height: 220, borderRadius: '50%', border: `1px solid ${TEAL}10`, pointerEvents: 'none' }} />
           <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>De les</p>
           <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${TEAL}, ${TEAL}44)`, borderRadius: 2, marginBottom: 28 }} />
-          <p style={{ color: WHITE, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 36px', fontFamily: 'Inter, sans-serif' }}>Snel werkt.<br/>Tot het niet meer werkt.</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            {[
-              'Je applicatie hangt vast bij de aanbieder.',
-              'De kosten lopen snel op.',
-              'Niemand begrijpt meer wat de code doet — of waarom.',
-            ].map((b, i) => (
-              <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <span style={{ color: TEAL, fontSize: '1.1rem', lineHeight: 1.5, fontFamily: 'Inter, sans-serif', flexShrink: 0 }}>—</span>
-                <p style={{ color: `${WHITE}CC`, fontSize: '1.0rem', lineHeight: 1.6, margin: 0, fontFamily: 'Inter, sans-serif' }}>{b}</p>
-              </div>
-            ))}
-          </div>
+          <p style={{ color: WHITE, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 24px', fontFamily: 'Inter, sans-serif' }}>
+            AI heeft guardrails nodig.
+          </p>
+          <p style={{ color: `${WHITE}88`, fontSize: '1.1rem', lineHeight: 1.7, margin: '0 0 36px', fontFamily: 'Inter, sans-serif', maxWidth: '72%' }}>
+            Zonder duidelijke kaders beslist AI zelf wat het bouwt — en hoe. Je moet expliciet zeggen wat kan en wat niet. De teugels in eigen handen houden is geen rem op snelheid. Het is de enige manier om die snelheid vol te houden.
+          </p>
         </div>
         <Notes>
-          "De snelheid is reëel — maar zonder structuur is het geen vooruitgang. Het is schuld die je opbouwt."<br/><br/>
-          "Hoe combineer je die snelheid met de controle die je als team nodig hebt?"
+          "De les was niet dat AI te snel gaat. De les was dat wij te weinig richting gaven."<br/><br/>
+          "AI vult de leegte op. Als u niet zegt hoe de architectuur moet zijn, kiest AI er één. Als u niet zegt welke data uit de database moet komen, bedenkt AI iets. Als u niet zegt wat de scope is, bouwt AI verder."<br/><br/>
+          "Guardrails zijn geen beperking — ze zijn de voorwaarde om AI nuttig te laten zijn."<br/><br/>
+          <em>Overgang:</em> "En het goede nieuws: die guardrails hoef je niet uit het niets te bedenken."
         </Notes>
       </Slide>
 
