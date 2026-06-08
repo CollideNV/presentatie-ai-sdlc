@@ -95,13 +95,14 @@ function RequirementsEvolutie({ phase }) {
         flexShrink: 0,
         position: 'relative',
         overflow: 'hidden',
+        backgroundColor: c.dark ? NAVY : BG,
         borderLeft: c.dark ? `1px solid ${c.accent}18` : `1px solid ${SLATE}15`,
       }}>
         <img alt="" src="/Gemini_Generated_Image_hhm3vwhhm3vwhhm3.png" style={{
           width: 'auto',
-          height: '300%',
+          height: '306%',
           position: 'absolute',
-          top: `${-phase * 100}%`,
+          top: `calc(${-phase * 100}% - 1%)`,
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'block',
@@ -166,7 +167,10 @@ function CodeEvolutie({ phase }) {
       {cornerImg && <img alt="" src={cornerImg} style={{
         position: 'absolute', bottom: -80, right: -80,
         width: 520, height: 520,
-        opacity: 0.50, pointerEvents: 'none',
+        pointerEvents: 'none',
+        opacity: 0.50,
+        maskImage: 'radial-gradient(ellipse 80% 80% at 80% 80%, black 30%, transparent 75%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 80% 80%, black 30%, transparent 75%)',
       }} />}
       {/* Content */}
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', padding: '52px 96px', boxSizing: 'border-box' }}>
