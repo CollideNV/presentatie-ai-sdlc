@@ -71,7 +71,6 @@ function gherkinLine(line, i) {
 
 function RequirementsEvolutie({ phase }) {
   const ff = 'Inter, sans-serif'
-  const [showModal, setShowModal] = React.useState(false)
   const configs = [
     {
       dark: false, accent: SLATE,
@@ -128,45 +127,45 @@ function RequirementsEvolutie({ phase }) {
             </div>
           ))}
         </div>
-        {phase === 2 && (
-          <button onClick={() => setShowModal(true)} style={{
-            marginTop: 32, alignSelf: 'flex-start', background: 'none', border: `1px solid ${BLUE}55`,
-            borderRadius: 6, padding: '8px 18px', color: `${WHITE}99`, fontSize: '0.75rem',
-            letterSpacing: '0.06em', fontFamily: ff, cursor: 'pointer',
-          }}>
-            Zie voorbeeld gedragsscenario →
-          </button>
-        )}
-        {showModal && (
-          <div onClick={() => setShowModal(false)} style={{
-            position: 'fixed', inset: 0, zIndex: 1000,
-            background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <div onClick={e => e.stopPropagation()} style={{
-              background: '#0d1b2a', border: `1px solid ${TEAL}40`,
-              borderRadius: 12, padding: '32px 40px',
-              maxWidth: 680, width: '90%', position: 'relative',
-            }}>
-              <button onClick={() => setShowModal(false)} style={{
-                position: 'absolute', top: 12, right: 16,
-                background: 'none', border: 'none', color: `${WHITE}55`,
-                fontSize: '1.4rem', cursor: 'pointer', lineHeight: 1,
-              }}>×</button>
-              <p style={{ color: TEAL, fontSize: '0.6rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>
-                Voorbeeld gedragsscenario
-              </p>
-              <pre style={{
-                fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
-                fontSize: '0.78rem', lineHeight: 1.75, margin: 0,
-                whiteSpace: 'pre', overflowX: 'auto',
-              }}>
-                {GHERKIN.split('\n').map((line, i) => gherkinLine(line, i))}
-              </pre>
-            </div>
-          </div>
-        )}
       </div>
+        {phase === 2 && (
+          <Appear>
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 10,
+              background: NAVY,
+              display: 'flex',
+            }}>
+              {/* Left: context */}
+              <div style={{ width: '34%', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '56px 52px', borderRight: `1px solid ${BLUE}20` }}>
+                <p style={{ color: BLUE, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: ff }}>
+                  Voorbeeld
+                </p>
+                <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${BLUE}, ${TEAL})`, borderRadius: 2, marginBottom: 28 }} />
+                <p style={{ color: WHITE, fontSize: '2rem', fontWeight: 900, lineHeight: 1.15, margin: '0 0 24px', fontFamily: ff }}>
+                  Gedragsscenario
+                </p>
+                <p style={{ color: `${WHITE}66`, fontSize: '0.88rem', lineHeight: 1.7, margin: 0, fontFamily: ff }}>
+                  Geschreven in <strong style={{ color: `${WHITE}99` }}>Gherkin</strong> — leesbaar voor zowel business als development.
+                </p>
+                <p style={{ color: `${WHITE}44`, fontSize: '0.78rem', lineHeight: 1.65, margin: '20px 0 0', fontFamily: ff }}>
+                  Dezelfde tekst wordt straks de basis voor geautomatiseerde testen.
+                </p>
+              </div>
+              {/* Right: code */}
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 52px' }}>
+                <pre style={{
+                  fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
+                  fontSize: '0.82rem', lineHeight: 1.8, margin: 0,
+                  whiteSpace: 'pre', background: `${WHITE}05`,
+                  border: `1px solid ${BLUE}25`, borderRadius: 10,
+                  padding: '28px 36px', width: '100%',
+                }}>
+                  {GHERKIN.split('\n').map((line, i) => gherkinLine(line, i))}
+                </pre>
+              </div>
+            </div>
+          </Appear>
+        )}
       {/* Illustration panel — sprite sheet, one scene per phase */}
       <div style={{
         width: '36%',
