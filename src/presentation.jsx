@@ -740,9 +740,14 @@ export default function Presentation() {
           <h2 style={{ color: NAVY, fontSize: '2.8rem', fontWeight: 900, lineHeight: 1.1, margin: '0 0 12px', fontFamily: 'Inter, sans-serif' }}>
             Dus hebben we het gewoon geprobeerd.
           </h2>
-          <p style={{ color: SLATE, fontSize: '0.95rem', lineHeight: 1.65, margin: '0 0 32px', fontFamily: 'Inter, sans-serif' }}>
-            In het begin was het indrukwekkend. Maar al snel merkten we wat vibe coding in de praktijk betekent:
+          <p style={{ color: SLATE, fontSize: '0.95rem', lineHeight: 1.65, margin: '0 0 8px', fontFamily: 'Inter, sans-serif' }}>
+            In het begin was het indrukwekkend.
           </p>
+          <Appear>
+            <p style={{ color: SLATE, fontSize: '0.95rem', lineHeight: 1.65, margin: '0 0 32px', fontFamily: 'Inter, sans-serif' }}>
+              Maar al snel merkten we wat vibe coding in de praktijk betekent:
+            </p>
+          </Appear>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {[
               'Features die we nooit gevraagd hadden — maar wel gebouwd werden.',
@@ -762,10 +767,11 @@ export default function Presentation() {
         <Notes>
           <em>[Berten]</em><br/><br/>
           "We zijn het gewoon gaan doen. We hebben een prompt geschreven, AI laten werken, en in het begin was het... eigenlijk best indrukwekkend."<br/><br/>
-          <em>[Klik 1]</em> "Features die we nooit gevraagd hadden — maar AI vond ze een goed idee."<br/><br/>
-          <em>[Klik 2]</em> "Dezelfde functionaliteit op drie plekken in de app — ook drie keer in de code geschreven."<br/><br/>
-          <em>[Klik 3]</em> "Data die door de code zelf werd samengesteld — alsof het klopte — maar nergens uit de database kwam."<br/><br/>
-          <em>[Klik 4]</em> "Een kluwen van applicaties waarvan niemand meer wist hoe alles samenhing. Enkel AI wist nog hoe ze te starten."<br/><br/>
+          <em>[Klik 1]</em> "Maar al snel merkten we wat vibe coding in de praktijk betekent."<br/><br/>
+          <em>[Klik 2]</em> "Features die we nooit gevraagd hadden — maar AI vond ze een goed idee."<br/><br/>
+          <em>[Klik 3]</em> "Dezelfde functionaliteit op drie plekken in de app — ook drie keer in de code geschreven."<br/><br/>
+          <em>[Klik 4]</em> "Data die door de code zelf werd samengesteld — alsof het klopte — maar nergens uit de database kwam."<br/><br/>
+          <em>[Klik 5]</em> "Een kluwen van applicaties waarvan niemand meer wist hoe alles samenhing. Enkel AI wist nog hoe ze te starten."<br/><br/>
           "De code deed iets, maar niemand begreep meer precies wat — of waarom."
         </Notes>
       </Slide>
