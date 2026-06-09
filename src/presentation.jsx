@@ -855,6 +855,23 @@ export default function Presentation() {
         </Notes>
       </Slide>
 
+      {/* ── Section break: Requirements ─────────────────────────────── */}
+      <Slide style={{ padding: 0, backgroundColor: NAVY }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: NAVY, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px 96px' }}>
+          <div style={{ position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)', fontSize: '22rem', fontWeight: 900, color: `${BLUE}12`, fontFamily: 'Inter, sans-serif', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>01</div>
+          <p style={{ color: BLUE, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>Deel 1 van 3</p>
+          <div style={{ height: 3, width: 48, background: `linear-gradient(to right, ${BLUE}, ${TEAL})`, borderRadius: 2, marginBottom: 28 }} />
+          <h2 style={{ color: WHITE, fontSize: '4.5rem', fontWeight: 900, lineHeight: 1.05, margin: '0 0 28px', fontFamily: 'Inter, sans-serif' }}>Requirements</h2>
+          <p style={{ color: `${WHITE}66`, fontSize: '1.05rem', lineHeight: 1.7, margin: 0, fontFamily: 'Inter, sans-serif', maxWidth: 560 }}>
+            Alles begint met de juiste vraag stellen — en die vraag zo precies mogelijk vastleggen.
+          </p>
+        </div>
+        <Notes>
+          <em>[Rubin neemt over]</em><br/><br/>
+          "We beginnen bij het begin: requirements. Hoe omschrijf je wat er gebouwd moet worden — en hoe verandert AI dat proces?"
+        </Notes>
+      </Slide>
+
       {/* ── Requirements evolutie — 3 slides ────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
         <RequirementsEvolutie phase={0} />
@@ -941,6 +958,23 @@ export default function Presentation() {
         </Notes>
       </Slide>
 
+      {/* ── Section break: Ontwikkeling ─────────────────────────────── */}
+      <Slide style={{ padding: 0, backgroundColor: NAVY }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: NAVY, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px 96px' }}>
+          <div style={{ position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)', fontSize: '22rem', fontWeight: 900, color: `${TEAL}12`, fontFamily: 'Inter, sans-serif', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>02</div>
+          <p style={{ color: TEAL, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>Deel 2 van 3</p>
+          <div style={{ height: 3, width: 48, background: `linear-gradient(to right, ${TEAL}, ${BLUE})`, borderRadius: 2, marginBottom: 28 }} />
+          <h2 style={{ color: WHITE, fontSize: '4.5rem', fontWeight: 900, lineHeight: 1.05, margin: '0 0 28px', fontFamily: 'Inter, sans-serif' }}>Ontwikkeling</h2>
+          <p style={{ color: `${WHITE}66`, fontSize: '1.05rem', lineHeight: 1.7, margin: 0, fontFamily: 'Inter, sans-serif', maxWidth: 560 }}>
+            Van requirements naar werkende code — hoe ziet dat er uit als AI de uitvoering overneemt?
+          </p>
+        </div>
+        <Notes>
+          <em>[Berten]</em><br/><br/>
+          "Dan nu het stuk dat voor veel developers het meest voelbaar is: hoe verandert het schrijven van code zelf?"
+        </Notes>
+      </Slide>
+
       {/* ── Code evolutie — 3 slides ─────────────────────────────────── */}
       <Slide style={{ padding: 0, backgroundColor: BG }}>
         <CodeEvolutie phase={0} />
@@ -965,6 +999,23 @@ export default function Presentation() {
           <em>[Berten]</em><br/><br/>
           "In Fase 2 neemt de AI Agent de uitvoering volledig over. Implementatie en testen worden gegenereerd op basis van de Gedragsscenario's."<br/><br/>
           "De developer verschuift naar architect en reviewer. Architectuur leeft in de code zelf — AI Agent leest die context en gebruikt ze voor de implementatie. Deep-dive blijft menselijk, maar zonder technisch profiel."
+        </Notes>
+      </Slide>
+
+      {/* ── Section break: Testing ───────────────────────────────────── */}
+      <Slide style={{ padding: 0, backgroundColor: NAVY }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: NAVY, overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px 96px' }}>
+          <div style={{ position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)', fontSize: '22rem', fontWeight: 900, color: `${BLUE}12`, fontFamily: 'Inter, sans-serif', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>03</div>
+          <p style={{ color: BLUE, fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700, margin: '0 0 16px', fontFamily: 'Inter, sans-serif' }}>Deel 3 van 3</p>
+          <div style={{ height: 3, width: 48, background: `linear-gradient(to right, ${BLUE}, ${TEAL})`, borderRadius: 2, marginBottom: 28 }} />
+          <h2 style={{ color: WHITE, fontSize: '4.5rem', fontWeight: 900, lineHeight: 1.05, margin: '0 0 28px', fontFamily: 'Inter, sans-serif' }}>Testing</h2>
+          <p style={{ color: `${WHITE}66`, fontSize: '1.05rem', lineHeight: 1.7, margin: 0, fontFamily: 'Inter, sans-serif', maxWidth: 560 }}>
+            Kwaliteit borgen zonder de snelheid te verliezen — en de link met requirements sluiten.
+          </p>
+        </div>
+        <Notes>
+          <em>[Rubin neemt over]</em><br/><br/>
+          "En dan het laatste stuk — testing. En hier sluit de cirkel, want de Gedragsscenario's die we in deel 1 schreven komen hier terug."
         </Notes>
       </Slide>
 
