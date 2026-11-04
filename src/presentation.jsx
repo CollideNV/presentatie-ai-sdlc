@@ -88,8 +88,8 @@ function RequirementsEvolutie({ phase }) {
       headline: 'AI doet de kwaliteitscheck.',
       bullets: [
         "AI Agent screent elk requirement: tegenstrijdigheden, ontbrekende scenario's, onduidelijkheden.",
-        'Tech Lead focust enkel op functionele intent — niet meer op checklist werk.',
-        'Sneller, grondiger — en de analist krijgt direct feedback.',
+        'Analist bewaakt de functionele intent: is dit wat de klant écht nodig heeft?',
+        'Tech Lead checkt de technische fit: past dit in het huidige technische design?',
       ],
     },
     {
@@ -887,7 +887,8 @@ export default function Presentation() {
         <Notes>
           <em>[Rubin]</em><br/><br/>
           "In Fase 1 splitsen we die review op. AI doet de snelle volledigheidscheck: zijn er tegenstrijdigheden? Ontbreken er scenario's? Is de User Story helder?"<br/><br/>
-          "De Tech Lead focust op intentie en toepasbaarheid. Niet meer 'is dit compleet?' — dat heeft AI al gedaan. Wel: 'klopt dit functioneel en past het bij de bedoeling van de klant?'"
+          "Daarna volgen twee menselijke checks, elk met hun eigen expertise. De analist bewaakt de functionele intent: klopt dit met wat de klant bedoelt? De Tech Lead kijkt of het past in het huidige technische design."<br/><br/>
+          "'Is dit compleet?' — dat heeft AI al gedaan. Niemand doet nog checklist werk, en de analist krijgt meteen feedback."
         </Notes>
       </Slide>
 
