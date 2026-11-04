@@ -97,9 +97,9 @@ function RequirementsEvolutie({ phase }) {
       eyebrow: '1 van 3 · Requirements — Fase 2',
       headline: 'De AIGeneer schrijft mee.',
       bullets: [
-        "Requirements én Gedragsscenario's worden door de AIGeneer opgesteld — AI Agent valideert de volledigheid.",
+        "Requirements én BDD-scenario's in Gherkin worden door de AIGeneer opgesteld — een AI Agent valideert ze op volledigheid en consistentie.",
         'AIGeneer blijft eindverantwoordelijk: AI ondersteunt, mens beslist.',
-        "Wat je nu schrijft, wordt straks ook de basis voor je testen — één investering, twee keer rendement.",
+        "Die feature files worden straks de bron voor je acceptance tests — één investering, twee keer rendement.",
       ],
     },
   ]
@@ -161,13 +161,13 @@ function RequirementsEvolutie({ phase }) {
               </p>
               <div style={{ height: 3, width: 40, background: `linear-gradient(to right, ${BLUE}, ${TEAL})`, borderRadius: 2, marginBottom: 28 }} />
               <p style={{ color: WHITE, fontSize: '2rem', fontWeight: 900, lineHeight: 1.15, margin: '0 0 24px', fontFamily: ff }}>
-                Gedragsscenario
+                BDD-scenario
               </p>
               <p style={{ color: `${WHITE}66`, fontSize: '0.88rem', lineHeight: 1.7, margin: 0, fontFamily: ff }}>
-                Geschreven in <strong style={{ color: `${WHITE}99` }}>Gherkin</strong> — leesbaar voor zowel business als development.
+                Een <strong style={{ color: `${WHITE}99` }}>Gherkin</strong> feature file — leesbaar voor zowel business als dev.
               </p>
               <p style={{ color: `${WHITE}44`, fontSize: '0.78rem', lineHeight: 1.65, margin: '20px 0 0', fontFamily: ff }}>
-                Dezelfde tekst wordt straks de basis voor geautomatiseerde testen.
+                Dezelfde feature file is straks de bron voor de geautomatiseerde acceptance tests.
               </p>
             </div>
             {/* Right: code */}
@@ -200,8 +200,8 @@ function CodeEvolutie({ phase }) {
       eyebrow: '2 van 3 · Code-ontwikkeling — Voor AI',
       headline: 'Developer doet alles zelf.',
       bullets: [
-        'Van technische analyse tot Peer Review: één persoon, alles tegelijk.',
-        'Peer Review als enig veiligheidsnet: kwaliteit, context en architectuur — allemaal tegelijk beoordeeld.',
+        'Van technische analyse tot pull request: één persoon, alles tegelijk.',
+        'De PR review als enig vangnet: code quality, context en architectuur — allemaal in één review.',
         'Hoog volume, hoge mentale belasting, trage feedback loop.',
       ],
     },
@@ -210,8 +210,8 @@ function CodeEvolutie({ phase }) {
       eyebrow: '2 van 3 · Code-ontwikkeling — Fase 1',
       headline: 'AI versnelt de uitvoering.',
       bullets: [
-        'Implementatie en testen AI-assisted: developer stuurt, AI voert uit.',
-        'Peer Review gesplitst: AI Agent doet de snelle kwaliteitscheck, Dev Team focust op context en intent.',
+        'Implementatie en unit tests AI-assisted: developer stuurt, AI voert uit.',
+        'PR review gesplitst: een AI Agent doet de eerste pass (conventies, bugs, code smells), het team focust op context en intent.',
         'Minder routinewerk schrijven — meer tijd voor wat écht telt.',
       ],
     },
@@ -220,9 +220,9 @@ function CodeEvolutie({ phase }) {
       eyebrow: '2 van 3 · Code-ontwikkeling — Fase 2',
       headline: 'AI Agent schrijft en test de code.',
       bullets: [
-        "AI Agent implementeert volledig op basis van Gedragsscenario's — inclusief automatische testen.",
-        'AIGeneer bepaalt de architectuur en keurt goed via de Peer Review deep-dive.',
-        'Geen diepgaande technische kennis vereist. De driving seat blijft bij de mens.',
+        "AI Agent implementeert volledig op basis van de BDD-scenario's — inclusief unit- en acceptance tests.",
+        'AIGeneer bewaakt de architectuur en keurt goed via een grondige PR review.',
+        'Technische kennis verschuift van code schrijven naar code beoordelen. De driving seat blijft bij de mens.',
       ],
     },
   ]
@@ -367,7 +367,7 @@ function TestingEvolutie({ phase }) {
       eyebrow: '3 van 3 · Testing & Delivery — Fase 1',
       headline: 'AI-assisted testing.',
       bullets: [
-        "QA-Engineer schrijft scenario's en testen met AI-hulp: sneller, betere dekking.",
+        "QA-Engineer schrijft scenario's en tests met AI-hulp: sneller, hogere test coverage.",
         'AI genereert de randgevallen die een mens zou missen.',
         'QA-Engineer focust op intentie en gedrag — niet meer op checklist werk.',
       ],
@@ -377,7 +377,7 @@ function TestingEvolutie({ phase }) {
       eyebrow: '3 van 3 · Testing & Delivery — Fase 2',
       headline: 'Alles komt samen.',
       bullets: [
-        "Gedragsscenario's uit stap 1 zijn de bron: AI Agent genereert alle E2E testen automatisch.",
+        "De BDD-scenario's uit stap 1 zijn de bron: een AI Agent genereert de volledige E2E test suite.",
         '"Is dit wat de klant wil?" werd al beantwoord in de requirements fase — niet op het einde.',
         'AIGeneer keurt goed op gedrag en intent. CI/CD deployt automatisch.',
       ],
@@ -456,7 +456,7 @@ export default function Presentation() {
               margin: '0 0 32px',
               fontFamily: 'Inter, sans-serif',
             }}>
-              AI with Business Impact · Corda Campus Hasselt · 09/06/2026
+              Interne sessie · Collide × The Value Hub
             </p>
             <h1 style={{
               color: NAVY,
@@ -467,7 +467,7 @@ export default function Presentation() {
               fontFamily: 'Inter, sans-serif',
               textAlign: 'left',
             }}>
-              AI in uw<br />
+              AI in ons<br />
               <G from={TEAL} to={BLUE}>ontwikkelingsproces</G>
             </h1>
             <p style={{ color: SLATE, fontSize: '1.15rem', margin: '0 0 60px', fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
@@ -640,7 +640,7 @@ export default function Presentation() {
           <em>[Berten]</em> "Ik ben Berten."<br/>
           <em>[Rubin]</em> "En ik ben Rubin."<br/><br/>
           "Samen runnen we een Product Factory — we managen software-projecten voor onze klanten, van idee tot oplevering."<br/><br/>
-          "En het is vanuit die context dat we hier staan vandaag."<br/><br/>
+          "Jullie kennen ons, en jullie kennen die Product Factory — jullie bouwen er elke dag mee aan. Vandaag nemen we jullie mee in hoe we AI in die werking aan het inbouwen zijn."<br/><br/>
           <em>Overgang:</em><br/>
           "Want jullie kennen ze vast — die LinkedIn posts waarbij iemand beweert een hele app te hebben gebouwd in een uurtje. Uiteraard willen wij onze werking ook automatiseren. Dus hebben we het gewoon... geprobeerd."
         </Notes>
@@ -725,9 +725,9 @@ export default function Presentation() {
         </div>
         <Notes>
           <em>[Rubin] [Wijs naar het scherm]</em><br/><br/>
-          "U kent ze wel — die LinkedIn posts. Iemand bouwt een volledig platform in 47 minuten. Zonder developer. Gewoon prompts."<br/><br/>
+          "Jullie kennen ze wel — die LinkedIn posts. Iemand bouwt een volledig platform in 47 minuten. Zonder developer. Gewoon prompts."<br/><br/>
           "En de comments stromen binnen: 'Waanzinnig!' 'Indrukwekkend!' '🔥'"<br/><br/>
-          "Dus wat doen wij? We proberen het."
+          "En ongetwijfeld krijgen jullie die vraag ook van klanten: 'kan dat bij ons niet ook zo snel?' Dus wat doen wij? We proberen het."
         </Notes>
       </Slide>
 
@@ -793,7 +793,7 @@ export default function Presentation() {
         <Notes>
           <em>[Berten]</em><br/><br/>
           "De les was niet dat AI te snel gaat. De les was dat wij te weinig richting gaven."<br/><br/>
-          "AI vult de leegte op. Als u niet zegt hoe de architectuur moet zijn, kiest AI er één. Als u niet zegt welke data uit de database moet komen, bedenkt AI iets. Als u niet zegt wat de scope is, bouwt AI verder."<br/><br/>
+          "AI vult de leegte op. Als wij niet zeggen hoe de architectuur moet zijn, kiest AI er één. Als wij niet zeggen welke data uit de database moet komen, bedenkt AI iets. Als wij niet zeggen wat de scope is, bouwt AI verder."<br/><br/>
           "Guardrails zijn geen beperking — ze zijn de voorwaarde om AI nuttig te laten zijn."<br/><br/>
           <em>Overgang:</em> "En het goede nieuws: die guardrails hoef je niet uit het niets te bedenken."
         </Notes>
@@ -895,7 +895,7 @@ export default function Presentation() {
         <RequirementsEvolutie phase={2} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "In Fase 2 zijn we verder gegaan. We schrijven nu Gedragsscenario's. Vóór er nagedacht wordt over architectuur of implementatie beschrijft het hele team samen hoe het systeem zich moet gedragen — in elk denkbaar scenario."<br/><br/>
+          "In Fase 2 zijn we verder gegaan. We werken nu met BDD: scenario's in Gherkin. Vóór er nagedacht wordt over architectuur of implementatie beschrijft het hele team samen hoe het systeem zich moet gedragen — in elk denkbaar scenario."<br/><br/>
           "En die scenario's verdwijnen niet. Ze leven in de codebase. En — zoals je straks zult zien — ze betalen dubbel."
         </Notes>
       </Slide>
@@ -980,7 +980,7 @@ export default function Presentation() {
         <CodeEvolutie phase={0} />
         <Notes>
           <em>[Berten]</em><br/><br/>
-          "Voor AI deed de developer alles zelf: analyse, schrijven, testen, Peer Review. Eén kwaliteitscheck aan het einde — door het Dev Team. Alles op hetzelfde moment: kwaliteit, context, architectuur, intent."
+          "Voor AI deed de developer alles zelf: analyse, schrijven, testen, PR review. Eén kwaliteitscheck aan het einde — door het Dev Team. Alles op hetzelfde moment: kwaliteit, context, architectuur, intent."
         </Notes>
       </Slide>
 
@@ -997,8 +997,8 @@ export default function Presentation() {
         <CodeEvolutie phase={2} />
         <Notes>
           <em>[Berten]</em><br/><br/>
-          "In Fase 2 neemt de AI Agent de uitvoering volledig over. Implementatie en testen worden gegenereerd op basis van de Gedragsscenario's."<br/><br/>
-          "De developer verschuift naar architect en reviewer. Architectuur leeft in de code zelf — AI Agent leest die context en gebruikt ze voor de implementatie. Deep-dive blijft menselijk, maar zonder technisch profiel."
+          "In Fase 2 neemt de AI Agent de uitvoering volledig over. Implementatie en testen worden gegenereerd op basis van de BDD-scenario's."<br/><br/>
+          "De developer verschuift naar architect en reviewer. Architectuur leeft in de code zelf — AI Agent leest die context en gebruikt ze voor de implementatie. De deep-dive review blijft menselijk — en vraagt nog steeds technisch inzicht, alleen op een ander niveau: architectuur en design in plaats van regel per regel."
         </Notes>
       </Slide>
 
@@ -1015,7 +1015,7 @@ export default function Presentation() {
         </div>
         <Notes>
           <em>[Rubin neemt over]</em><br/><br/>
-          "En dan het laatste stuk — testing. En hier sluit de cirkel, want de Gedragsscenario's die we in deel 1 schreven komen hier terug."
+          "En dan het laatste stuk — testing. En hier sluit de cirkel, want de BDD-scenario's die we in deel 1 schreven komen hier terug."
         </Notes>
       </Slide>
 
@@ -1024,7 +1024,7 @@ export default function Presentation() {
         <TestingEvolutie phase={0} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "Voor AI schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan automatische testen draaien, manuele verificatie."<br/><br/>
+          "Voor AI schreef een QA-Engineer scenario's specifiek voor testen — vaak nadat de code al af was. Dan de geautomatiseerde tests draaien, en manuele verificatie."<br/><br/>
           "En de vraag 'is dit wat de klant bedoelde?' landde steeds bij de QA-Engineer, op het einde van het proces. Als het antwoord 'nee' was, was de kostprijs hoog."
         </Notes>
       </Slide>
@@ -1042,8 +1042,8 @@ export default function Presentation() {
         <TestingEvolutie phase={2} />
         <Notes>
           <em>[Rubin]</em><br/><br/>
-          "In Fase 2 komt alles samen. De Gedragsscenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E testen. AI Agent genereert de testen, AIGeneer keurt goed."<br/><br/>
-          "En die vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase — hier controleer je enkel nog of de code doet wat beschreven staat. Eén investering in Gedragsscenario's betaalt dubbel."
+          "In Fase 2 komt alles samen. De BDD-scenario's die we in stap 1 schreven zijn nu ook de bron voor onze E2E tests. AI Agent genereert de tests, AIGeneer keurt goed."<br/><br/>
+          "En die vraag 'is dit wat de klant bedoelde?' werd al beantwoord in de requirements fase — hier controleer je enkel nog of de code doet wat beschreven staat. Eén investering in BDD-scenario's betaalt dubbel."
         </Notes>
       </Slide>
 
@@ -1100,14 +1100,14 @@ export default function Presentation() {
             marginTop: 40,
             lineHeight: 1.7,
           }}>
-            De meeste bedrijven denken dat het een binaire keuze is. Het is dat niet.<br />
-            Die wereld ertussen — dat is precies waar we het vandaag over hebben.
+            Het is geen binaire keuze — niet voor onze klanten, en niet voor ons.<br />
+            Die wereld ertussen — daar bouwen wij onze werking.
           </Text>
         </FlexBox>
         <Notes>
           <em>[Berten] Rustig brengen — laten landen.</em><br/><br/>
-          "Er bestaat een heel spectrum. En de meeste bedrijven die wij tegenkomen zitten ergens aan de linkerkant — niet omdat ze niet willen, maar omdat ze niet weten waar te beginnen."<br/><br/>
-          "U heeft net gezien hoe het spectrum werkt in de praktijk. Nu de vraag: waar wilt ú staan? En hoe begint u?"
+          "Er bestaat een heel spectrum. De meeste klanten die wij tegenkomen zitten ergens aan de linkerkant — niet omdat ze niet willen, maar omdat ze niet weten waar te beginnen."<br/><br/>
+          "Als wij hen daarin willen begeleiden, moeten we zelf voorop lopen. Jullie hebben net gezien waar we vandaag staan. De vraag is: waar staat jouw project — en wat is de volgende stap?"
         </Notes>
       </Slide>
 
@@ -1134,7 +1134,7 @@ export default function Presentation() {
               </span>
             </h2>
             <p style={{ color: `${WHITE}50`, fontSize: '1rem', lineHeight: 1.7, margin: '0 0 36px', fontFamily: 'Inter, sans-serif' }}>
-              Ervaring opdoen is het enige wat écht telt. Niet lezen. Niet plannen.
+              Ervaring opdoen is het enige wat écht telt. Niet lezen. Niet plannen. Doen — en delen wat we leren.
             </p>
 
             {/* Divider */}
@@ -1143,13 +1143,13 @@ export default function Presentation() {
             {/* CTA two-liner */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0, marginBottom: 28 }}>
               <div style={{ textAlign: 'center', padding: '0 48px' }}>
-                <p style={{ color: `${TEAL}cc`, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>Klein project</p>
+                <p style={{ color: `${TEAL}cc`, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>In je eigen project</p>
                 <p style={{ color: WHITE, fontSize: '1.25rem', fontWeight: 800, margin: 0, fontFamily: 'Inter, sans-serif' }}>Begin zelf.</p>
               </div>
               <div style={{ width: 1, height: 48, background: `${WHITE}15`, flexShrink: 0 }} />
               <div style={{ textAlign: 'center', padding: '0 48px' }}>
-                <p style={{ color: `${BLUE}cc`, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>Grotere ambitie</p>
-                <p style={{ color: WHITE, fontSize: '1.25rem', fontWeight: 800, margin: 0, fontFamily: 'Inter, sans-serif' }}>Betrek een partner.</p>
+                <p style={{ color: `${BLUE}cc`, fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px', fontFamily: 'Inter, sans-serif' }}>Als team</p>
+                <p style={{ color: WHITE, fontSize: '1.25rem', fontWeight: 800, margin: 0, fontFamily: 'Inter, sans-serif' }}>Leer van elkaar.</p>
               </div>
             </div>
 
@@ -1173,9 +1173,9 @@ export default function Presentation() {
         </div>
         <Notes>
           <em>[Berten]</em><br/><br/>
-          "U heeft vandaag genoeg gezien om te beginnen. Het enige wat ontbreekt is die eerste stap."<br/><br/>
-          "Kies één project. Begin deze week. Klein project? Begin zelf. Grotere ambitie — heel proces herdenken, team begeleiden? Dan helpen wij u graag."<br/><br/>
-          <em>[Samen]</em> "We staan na de sessie beschikbaar. Onze contactgegevens staan op het scherm."
+          "Jullie hebben vandaag genoeg gezien om te beginnen. Het enige wat ontbreekt is die eerste stap."<br/><br/>
+          "Kies één project. Begin deze week. In je eigen project kan je morgen al starten: laat AI een eerste review doen, of een eerste draft van een analyse schrijven. En deel wat je leert — wat werkt, en vooral ook wat niet. Zo bouwen we samen de ervaring op die we straks bij onze klanten inzetten."<br/><br/>
+          <em>[Samen]</em> "Vragen of ideeën? Spreek ons gerust aan, of stuur een berichtje."
         </Notes>
       </Slide>
 
@@ -1195,7 +1195,7 @@ export default function Presentation() {
               </span>
             </h2>
             <p style={{ color: `${WHITE}45`, fontSize: '1rem', fontFamily: 'Inter, sans-serif', margin: 0, letterSpacing: '0.03em' }}>
-              We staan voor u klaar.
+              Laat maar komen.
             </p>
           </div>
         </div>
