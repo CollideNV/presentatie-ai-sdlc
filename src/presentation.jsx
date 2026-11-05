@@ -867,7 +867,7 @@ export default function Presentation() {
           </p>
         </div>
         <Notes>
-          <em>[Rubin neemt over]</em><br/><br/>
+          <em>[Rubin]</em><br/><br/>
           "We beginnen bij het begin: requirements. Hoe omschrijf je wat er gebouwd moet worden — en hoe verandert AI dat proces?"
         </Notes>
       </Slide>
