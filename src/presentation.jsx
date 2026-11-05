@@ -793,9 +793,10 @@ export default function Presentation() {
         <Notes>
           <em>[Berten]</em><br/><br/>
           "De les was niet dat AI te snel gaat. De les was dat wij te weinig richting gaven."<br/><br/>
-          "AI vult de leegte op. Als wij niet zeggen hoe de architectuur moet zijn, kiest AI er één. Als wij niet zeggen welke data uit de database moet komen, bedenkt AI iets. Als wij niet zeggen wat de scope is, bouwt AI verder."<br/><br/>
+          "Een LLM genereert code of tekst omdat dat volgens zijn model het meest waarschijnlijke vervolg is — niet omdat ons project dat nodig heeft. Laten we het gewoon zijn ding doen, dan vult het elke leegte zelf in: het kiest een architectuur, verzint data die uit de database had moeten komen, en bouwt verder dan de scope."<br/><br/>
+          "Het is dus aan ons om GenAI voor ons te laten werken — niet omgekeerd. Dat betekent: duidelijke richtlijnen meegeven waaraan het resultaat moet voldoen. Welke architectuur volgen we? Waar komt de data vandaan? Wat valt binnen de scope, en wat niet?"<br/><br/>
           "Guardrails zijn geen beperking — ze zijn de voorwaarde om AI nuttig te laten zijn."<br/><br/>
-          <em>Overgang:</em> "En het goede nieuws: die guardrails hoef je niet uit het niets te bedenken."
+          <em>Overgang:</em> "En het goede nieuws: die guardrails hoeven we niet uit het niets te bedenken."
         </Notes>
       </Slide>
 
